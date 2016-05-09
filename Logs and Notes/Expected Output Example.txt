@@ -1,0 +1,714 @@
+Starting a game.
+New TitForTat player created for a new game.
+Player Alice initially has 0 score, and feels anger
+New BayesAct player created for a new game.
+EmoBayesActor[Bob] gender is: male
+EmoBayesActor[Bob] agent id is:  friend
+D:\Libraries\Python\bayesact-0.5.1\bayesact.py:511: RuntimeWarning: covariance is not positive-semidefinite.
+  self.f_s = NP.random.multivariate_normal(self.mu_n, self.sig_n)
+rhi:  41.1934316189  rlo:  0.704799988277  new cval:  40.4886316307
+---------- Turn 0 ------------------------
+Alice is taking turn 0
+Alice is giving 10 coins. (Keeping 0 coins.)
+EmoBayesActor[Bob] is taking turn 0
+myopic version:  [0.5335925844397724, 0.5126486970214704, 0.038880807941568875]  paab:  1
+calling pomcp search
+searched  642  iterations of POMCP_search
+pomcp version:  [2.0979011739373936, -0.10543292963156023, 3.821311412305349]   1   has value:  30.1254798764
+EmoBayesActor[Bob]  aab: [2.0979011739373936, -0.10543292963156023, 3.821311412305349]
+EmoBayesActor[Bob]  suggested action for the agent is : [2.0979011739373936, -0.10543292963156023, 3.821311412305349] 
+  closest label is:  cheer
+EmoBayesActor[Bob] wants to cooperate with similarity 0.625998371459
+EmoBayesActor[Bob] is giving 6.0 coins. (Keeping 4.0 coins.)
+%%%%%%%%%%%%%%%%%%%%  total weight:  1000.0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[2.0979011739373936, -0.10543292963156023, 3.821311412305349] 1 [] [1, 0]
+pruning tree with action taken:  ([2.0979011739373936, -0.10543292963156023, 3.821311412305349], 1)  and observation made:  ([], [1, 0])
+AS:  ([1.7808702962004872, 1.9498620105990605, 0.040376250064801195], 1)
+AS:  ([1.4339234543178914, -0.6609914651373799, 1.0332160617474204], 1)
+AS:  ([3.0492113385076527, 0.955978224606235, 2.1185139105603317], 1)
+AS:  ([2.0979011739373936, -0.10543292963156023, 3.821311412305349], 1)
+AS:  ([0.848761272883347, 2.0172630774942717, 1.2761156389918882], 1)
+AS:  ([3.4555006278974303, 3.9984879702723877, 1.1666677405510162], 1)
+AS:  ([-0.5440860562640208, 3.3324502049863307, 2.940448412729726], 1)
+AS:  ([-0.3495421882962679, 3.3695162871698776, 1.2975552397739243], 1)
+AS:  ([0.031021468071178705, -0.5909828458922335, -0.7935736789440029], 2)
+AS:  ([1.1632554314886538, 5.563043393403661, -1.0216953890509437], 1)
+AS:  ([0.2077475565889896, 3.0366472524342045, -0.678980897142833], 1)
+AS:  ([-0.027024222517432875, 0.7086518719540212, 0.11933235048130517], 1)
+AS:  ([2.535779634415758, 1.971706282041096, -2.3702391266039076], 1)
+AS:  ([1.4222693118762562, 0.5801521619719687, -1.3530890087495981], 1)
+AS:  ([0.34728595684494656, -0.798054737108925, -0.058977905332375125], 1)
+pruning tree ..
+best action:  3 distance  0.0
+best observation:  0  distance  0.0
+number of children searched  1
+best a:  3
+best o:  0
+best d:  0.0
+EmoBayesActor[Bob] [2.0979011739373936, -0.10543292963156023, 3.821311412305349] and 1 and <bayesact.State object at 0x000000000555C048>
+EmoBayesActor[Bob] about to prune [1.44, 1.11, 0.61] [0, 1]
+%%%%%%%%%%%%%%%%%%%%  total weight:  3.04859130782
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[] 0 [1.44, 1.11, 0.61] [0, 1]
+pruning tree with action taken:  ([], 0)  and observation made:  ([1.44, 1.11, 0.61], [0, 1])
+AS:  ([], 0)
+pruning tree ..
+best action:  0 distance  0.0
+best observation:  2  distance  1.15098670461
+number of children searched  27
+best a:  0
+best o:  2
+best d:  1.15098670461
+----- End of turn 0 results -----
+6.0
+Alice has 6.0 coins.
+EmoBayesActor[Bob] has 12.0 coins.
+
+-------------------------------------------
+---------- Turn 1 ------------------------
+Alice is taking turn 1
+Alice is giving 6.0 coins. (Keeping 4.0 coins.)
+EmoBayesActor[Bob] is taking turn 1
+myopic version:  [1.2694517055549566, 0.5902885038400791, 0.37577087588960884]  paab:  1
+calling pomcp search
+searched  658  iterations of POMCP_search
+pomcp version:  [-1.294344228009112, -2.4082438538227455, 2.118814658119761]   2   has value:  43.1015036422
+EmoBayesActor[Bob]  aab: [-1.294344228009112, -2.4082438538227455, 2.118814658119761]
+EmoBayesActor[Bob]  suggested action for the agent is : [-1.294344228009112, -2.4082438538227455, 2.118814658119761] 
+  closest label is:  babble_to
+EmoBayesActor[Bob] wants to defect with similarity 0.271652693885
+EmoBayesActor[Bob] is giving 7.0 coins. (Keeping 3.0 coins.)
+%%%%%%%%%%%%%%%%%%%%  total weight:  1000.0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[-1.294344228009112, -2.4082438538227455, 2.118814658119761] 2 [] [1, 0]
+pruning tree with action taken:  ([-1.294344228009112, -2.4082438538227455, 2.118814658119761], 2)  and observation made:  ([], [1, 0])
+AS:  ([-0.3186149235414492, 2.1246927975182177, -0.2872395726377485], 1)
+AS:  ([1.5615881409851948, -1.5855288481798615, 1.5356587547673337], 1)
+AS:  ([2.5632220953344063, -0.21928726692249806, -0.3812792160381294], 1)
+AS:  ([-1.294344228009112, -2.4082438538227455, 2.118814658119761], 2)
+AS:  ([-2.3226191124499835, -0.6502739637419771, 0.9390684180878432], 2)
+AS:  ([0.3161131279148469, -3.4189686258927603, 2.83555502308292], 1)
+AS:  ([2.5183527001536086, 3.140988324965899, 1.3528447766449512], 1)
+AS:  ([1.7208042321784598, 1.7817326505238602, 0.7816869833984399], 1)
+AS:  ([2.3886795103219955, 0.17632274527680758, 5.442715781831201], 1)
+AS:  ([2.3961684526725757, 2.195047305458991, 3.344405210980513], 1)
+AS:  ([2.561087774250321, 2.840300096473549, -1.1901868497187376], 1)
+AS:  ([2.5933150821773965, -2.1427812396599597, 4.272563753305118], 1)
+AS:  ([1.9821507948148447, -0.15198655649113296, 1.0433624900431224], 1)
+AS:  ([3.6998150341413467, 1.4619198075172153, 2.8798474607872127], 1)
+AS:  ([4.653337932225816, 2.076728343727502, 1.2475450027614892], 1)
+pruning tree ..
+best action:  3 distance  0.0
+best observation:  0  distance  0.0
+number of children searched  1
+best a:  3
+best o:  0
+best d:  0.0
+Alice is feeling anger with intensity 4.0
+EmoBayesActor[Bob] [-1.294344228009112, -2.4082438538227455, 2.118814658119761] and 2 and <bayesact.State object at 0x000000000555C0B8>
+EmoBayesActor[Bob] Before Message: Agent thinks it was most likely a:  mother-in-law
+EmoBayesActor[Bob] Before Message: Agent thought you were most likely a:  organizer
+EmoBayesActor[Bob] Extra message received.
+EmoBayesActor[Bob] observed that Alice felt annoyed with EPA value [-1.4  -0.6  -0.13]
+EmoBayesActor[Bob] Observed that the other player felt [-1.4  -0.6  -0.13]
+EmoBayesActor[Bob] : Alice felt [-1.4  -0.6  -0.13]
+EmoBayesActor[Bob] about to prune [1.44, 1.11, 0.61] [0, 1]
+D:\Libraries\Python\bayesact-0.5.1\bayesactemot.py:186: FutureWarning: comparison to `None` will result in an elementwise object comparison in the future.
+  if (not (observ==[] or observ==None)) and turn=="client":
+%%%%%%%%%%%%%%%%%%%%  total weight:  1.46816378969e-07
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[] 0 [1.44, 1.11, 0.61] [0, 1]
+pruning tree with action taken:  ([], 0)  and observation made:  ([1.44, 1.11, 0.61], [0, 1])
+AS:  ([], 0)
+pruning tree ..
+best action:  0 distance  0.0
+best observation:  0  distance  1.71538171041
+number of children searched  22
+best a:  0
+best o:  0
+best d:  1.71538171041
+EmoBayesActor[Bob] After Message: Agent thinks it is most likely a:  child_molester
+EmoBayesActor[Bob] After Message: Agent thought you are most likely a:  best_friend
+----- End of turn 1 results -----
+7.0
+Alice has 15.0 coins.
+EmoBayesActor[Bob] has 19.5 coins.
+
+-------------------------------------------
+---------- Turn 2 ------------------------
+Alice is taking turn 2
+Alice is giving 7.0 coins. (Keeping 3.0 coins.)
+EmoBayesActor[Bob] is taking turn 2
+myopic version:  [-2.5819733677332097, 0.04923445586468136, -0.042818373262193454]  paab:  1
+calling pomcp search
+searched  604  iterations of POMCP_search
+pomcp version:  [0.0021242520248256555, -4.000212293287223, -1.722773099521866]   2   has value:  47.0887356047
+EmoBayesActor[Bob]  aab: [0.0021242520248256555, -4.000212293287223, -1.722773099521866]
+EmoBayesActor[Bob]  suggested action for the agent is : [0.0021242520248256555, -4.000212293287223, -1.722773099521866] 
+  closest label is:  mumble_to
+EmoBayesActor[Bob] wants to defect with similarity 0.311696641675
+EmoBayesActor[Bob] is giving 7.0 coins. (Keeping 3.0 coins.)
+%%%%%%%%%%%%%%%%%%%%  total weight:  1000.0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[0.0021242520248256555, -4.000212293287223, -1.722773099521866] 2 [] [1, 0]
+pruning tree with action taken:  ([0.0021242520248256555, -4.000212293287223, -1.722773099521866], 2)  and observation made:  ([], [1, 0])
+AS:  ([4.3049292367123675, 1.3272018416198317, 0.9673112867526432], 1)
+AS:  ([5.814852069208371, 1.0097829957673132, 0.4131360233828971], 1)
+AS:  ([1.2396241726342514, 0.47468394172073214, -0.3247595567518279], 1)
+AS:  ([0.0021242520248256555, -4.000212293287223, -1.722773099521866], 2)
+AS:  ([-2.7263418976058675, -0.3322344750266798, 0.2529220307591073], 2)
+pruning tree ..
+best action:  3 distance  0.0
+best observation:  0  distance  0.0
+number of children searched  1
+best a:  3
+best o:  0
+best d:  0.0
+EmoBayesActor[Bob] [0.0021242520248256555, -4.000212293287223, -1.722773099521866] and 2 and <bayesact.State object at 0x000000000555C198>
+EmoBayesActor[Bob] about to prune [1.44, 1.11, 0.61] [0, 1]
+%%%%%%%%%%%%%%%%%%%%  total weight:  1.43899881897
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[] 0 [1.44, 1.11, 0.61] [0, 1]
+pruning tree with action taken:  ([], 0)  and observation made:  ([1.44, 1.11, 0.61], [0, 1])
+AS:  ([], 0)
+pruning tree ..
+best action:  0 distance  0.0
+best observation:  9  distance  2.21043505047
+number of children searched  19
+best a:  0
+best o:  9
+best d:  2.21043505047
+----- End of turn 2 results -----
+7.0
+Alice has 23.5 coins.
+EmoBayesActor[Bob] has 28.0 coins.
+
+-------------------------------------------
+---------- Turn 3 ------------------------
+Alice is taking turn 3
+Alice is giving 7.0 coins. (Keeping 3.0 coins.)
+EmoBayesActor[Bob] is taking turn 3
+myopic version:  [-3.0543836376405493, 0.3585719079598363, 0.2353225930877391]  paab:  1
+calling pomcp search
+searched  599  iterations of POMCP_search
+pomcp version:  [-3.3763647090433118, -0.2299984398949856, 0.14961243875403757]   2   has value:  47.0826237661
+EmoBayesActor[Bob]  aab: [-3.3763647090433118, -0.2299984398949856, 0.14961243875403757]
+EmoBayesActor[Bob]  suggested action for the agent is : [-3.3763647090433118, -0.2299984398949856, 0.14961243875403757] 
+  closest label is:  rob
+EmoBayesActor[Bob] wants to defect with similarity 0.915707737908
+EmoBayesActor[Bob] is giving 1.0 coins. (Keeping 9.0 coins.)
+%%%%%%%%%%%%%%%%%%%%  total weight:  1000.0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[-3.3763647090433118, -0.2299984398949856, 0.14961243875403757] 2 [] [1, 0]
+pruning tree with action taken:  ([-3.3763647090433118, -0.2299984398949856, 0.14961243875403757], 2)  and observation made:  ([], [1, 0])
+AS:  ([-2.2645279532685088, 0.7942536811583335, 0.5462547244238205], 2)
+AS:  ([-3.3763647090433118, -0.2299984398949856, 0.14961243875403757], 2)
+pruning tree ..
+best action:  1 distance  0.0
+best observation:  0  distance  0.0
+number of children searched  1
+best a:  1
+best o:  0
+best d:  0.0
+EmoBayesActor[Bob] [-3.3763647090433118, -0.2299984398949856, 0.14961243875403757] and 2 and <bayesact.State object at 0x00000000058AE198>
+EmoBayesActor[Bob] about to prune [1.44, 1.11, 0.61] [0, 1]
+%%%%%%%%%%%%%%%%%%%%  total weight:  4.21957513475
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[] 0 [1.44, 1.11, 0.61] [0, 1]
+pruning tree with action taken:  ([], 0)  and observation made:  ([1.44, 1.11, 0.61], [0, 1])
+AS:  ([], 0)
+pruning tree ..
+best action:  0 distance  0.0
+best observation:  6  distance  1.94193931337
+number of children searched  28
+best a:  0
+best o:  6
+best d:  1.94193931337
+----- End of turn 3 results -----
+1.0
+Alice has 26.0 coins.
+EmoBayesActor[Bob] has 39.5 coins.
+
+-------------------------------------------
+---------- Turn 4 ------------------------
+Alice is taking turn 4
+Alice is giving 1.0 coins. (Keeping 9.0 coins.)
+EmoBayesActor[Bob] is taking turn 4
+myopic version:  [-2.0451877520448813, -0.018923218591542137, 0.4412485464762997]  paab:  1
+calling pomcp search
+searched  573  iterations of POMCP_search
+pomcp version:  [-1.9877689240292093, -0.24973730462735677, 0.36457332403329273]   2   has value:  47.4307967185
+EmoBayesActor[Bob]  aab: [-1.9877689240292093, -0.24973730462735677, 0.36457332403329273]
+EmoBayesActor[Bob]  suggested action for the agent is : [-1.9877689240292093, -0.24973730462735677, 0.36457332403329273] 
+  closest label is:  ridicule
+EmoBayesActor[Bob] wants to defect with similarity 0.861662118189
+EmoBayesActor[Bob] is giving 1.0 coins. (Keeping 9.0 coins.)
+%%%%%%%%%%%%%%%%%%%%  total weight:  1000.0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[-1.9877689240292093, -0.24973730462735677, 0.36457332403329273] 2 [] [1, 0]
+pruning tree with action taken:  ([-1.9877689240292093, -0.24973730462735677, 0.36457332403329273], 2)  and observation made:  ([], [1, 0])
+AS:  ([-1.9877689240292093, -0.24973730462735677, 0.36457332403329273], 2)
+pruning tree ..
+best action:  0 distance  0.0
+best observation:  0  distance  0.0
+number of children searched  1
+best a:  0
+best o:  0
+best d:  0.0
+Alice is feeling anger with intensity 5.0
+EmoBayesActor[Bob] [-1.9877689240292093, -0.24973730462735677, 0.36457332403329273] and 2 and <bayesact.State object at 0x00000000055B9EB8>
+EmoBayesActor[Bob] Before Message: Agent thinks it was most likely a:  child_molester
+EmoBayesActor[Bob] Before Message: Agent thought you were most likely a:  best_friend
+EmoBayesActor[Bob] Extra message received.
+EmoBayesActor[Bob] observed that Alice felt angry with EPA value [-1.45 -0.3   1.13]
+EmoBayesActor[Bob] Observed that the other player felt [-1.45 -0.3   1.13]
+EmoBayesActor[Bob] : Alice felt [-1.45 -0.3   1.13]
+EmoBayesActor[Bob] about to prune [-2.28, -0.48, -0.84] [0, 2]
+%%%%%%%%%%%%%%%%%%%%  total weight:  2.97019224682e-44
+rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr eset
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[] 0 [-2.28, -0.48, -0.84] [0, 2]
+pruning tree with action taken:  ([], 0)  and observation made:  ([-2.28, -0.48, -0.84], [0, 2])
+AS:  ([], 0)
+pruning tree ..
+best action:  0 distance  0.0
+best observation:  2  distance  2.67961203458
+number of children searched  39
+best a:  0
+best o:  2
+best d:  2.67961203458
+EmoBayesActor[Bob] After Message: Agent thinks it is most likely a:  child_molester
+EmoBayesActor[Bob] After Message: Agent thought you are most likely a:  best_friend
+----- End of turn 4 results -----
+1.0
+Alice has 31.5 coins.
+EmoBayesActor[Bob] has 45.0 coins.
+
+-------------------------------------------
+---------- Turn 5 ------------------------
+Alice is taking turn 5
+Alice is giving 1.0 coins. (Keeping 9.0 coins.)
+EmoBayesActor[Bob] is taking turn 5
+myopic version:  [-1.9750257570865548, -0.08431957179395415, 0.13729494064961625]  paab:  1
+calling pomcp search
+searched  559  iterations of POMCP_search
+pomcp version:  [-2.3854754181134674, 0.04133521410300455, 0.33056201433558713]   2   has value:  38.6641910584
+EmoBayesActor[Bob]  aab: [-2.3854754181134674, 0.04133521410300455, 0.33056201433558713]
+EmoBayesActor[Bob]  suggested action for the agent is : [-2.3854754181134674, 0.04133521410300455, 0.33056201433558713] 
+  closest label is:  strangle
+EmoBayesActor[Bob] wants to defect with similarity 0.861834278504
+EmoBayesActor[Bob] is giving 1.0 coins. (Keeping 9.0 coins.)
+%%%%%%%%%%%%%%%%%%%%  total weight:  1000.0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[-2.3854754181134674, 0.04133521410300455, 0.33056201433558713] 2 [] [1, 0]
+pruning tree with action taken:  ([-2.3854754181134674, 0.04133521410300455, 0.33056201433558713], 2)  and observation made:  ([], [1, 0])
+AS:  ([-2.3854754181134674, 0.04133521410300455, 0.33056201433558713], 2)
+pruning tree ..
+best action:  0 distance  0.0
+best observation:  0  distance  0.0
+number of children searched  1
+best a:  0
+best o:  0
+best d:  0.0
+EmoBayesActor[Bob] [-2.3854754181134674, 0.04133521410300455, 0.33056201433558713] and 2 and <bayesact.State object at 0x0000000005B02400>
+EmoBayesActor[Bob] about to prune [-2.28, -0.48, -0.84] [0, 2]
+%%%%%%%%%%%%%%%%%%%%  total weight:  0.0750172697833
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[] 0 [-2.28, -0.48, -0.84] [0, 2]
+pruning tree with action taken:  ([], 0)  and observation made:  ([-2.28, -0.48, -0.84], [0, 2])
+AS:  ([], 0)
+pruning tree ..
+best action:  0 distance  0.0
+best observation:  35  distance  0.873476298024
+number of children searched  40
+best a:  0
+best o:  35
+best d:  0.873476298024
+----- End of turn 5 results -----
+1.0
+Alice has 37.0 coins.
+EmoBayesActor[Bob] has 50.5 coins.
+
+-------------------------------------------
+---------- Turn 6 ------------------------
+Alice is taking turn 6
+Alice is giving 1.0 coins. (Keeping 9.0 coins.)
+EmoBayesActor[Bob] is taking turn 6
+myopic version:  [-1.607256264057619, -0.15519674611082607, 0.3195968542086655]  paab:  1
+calling pomcp search
+searched  569  iterations of POMCP_search
+pomcp version:  [-1.9909451796969408, -0.15623847075231773, 0.7689442098499384]   2   has value:  37.5779661266
+EmoBayesActor[Bob]  aab: [-1.9909451796969408, -0.15623847075231773, 0.7689442098499384]
+EmoBayesActor[Bob]  suggested action for the agent is : [-1.9909451796969408, -0.15623847075231773, 0.7689442098499384] 
+  closest label is:  berate
+EmoBayesActor[Bob] wants to defect with similarity 0.748724504697
+EmoBayesActor[Bob] is giving 3.0 coins. (Keeping 7.0 coins.)
+%%%%%%%%%%%%%%%%%%%%  total weight:  1000.0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[-1.9909451796969408, -0.15623847075231773, 0.7689442098499384] 2 [] [1, 0]
+pruning tree with action taken:  ([-1.9909451796969408, -0.15623847075231773, 0.7689442098499384], 2)  and observation made:  ([], [1, 0])
+AS:  ([-1.9909451796969408, -0.15623847075231773, 0.7689442098499384], 2)
+pruning tree ..
+best action:  0 distance  0.0
+best observation:  0  distance  0.0
+number of children searched  1
+best a:  0
+best o:  0
+best d:  0.0
+EmoBayesActor[Bob] [-1.9909451796969408, -0.15623847075231773, 0.7689442098499384] and 2 and <bayesact.State object at 0x00000000057AA128>
+EmoBayesActor[Bob] about to prune [-2.28, -0.48, -0.84] [0, 2]
+%%%%%%%%%%%%%%%%%%%%  total weight:  0.0797719073361
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[] 0 [-2.28, -0.48, -0.84] [0, 2]
+pruning tree with action taken:  ([], 0)  and observation made:  ([-2.28, -0.48, -0.84], [0, 2])
+AS:  ([], 0)
+pruning tree ..
+best action:  0 distance  0.0
+best observation:  15  distance  1.43509239303
+number of children searched  41
+best a:  0
+best o:  15
+best d:  1.43509239303
+----- End of turn 6 results -----
+3.0
+Alice has 44.5 coins.
+EmoBayesActor[Bob] has 55.0 coins.
+
+-------------------------------------------
+---------- Turn 7 ------------------------
+Alice is taking turn 7
+Alice is giving 3.0 coins. (Keeping 7.0 coins.)
+EmoBayesActor[Bob] is taking turn 7
+myopic version:  [-1.9379443790774704, 0.044157874891620645, 0.24604820438797986]  paab:  1
+calling pomcp search
+searched  544  iterations of POMCP_search
+pomcp version:  [-2.447455038489212, -0.11772129163642302, 0.08589161758042846]   2   has value:  37.7169677721
+EmoBayesActor[Bob]  aab: [-2.447455038489212, -0.11772129163642302, 0.08589161758042846]
+EmoBayesActor[Bob]  suggested action for the agent is : [-2.447455038489212, -0.11772129163642302, 0.08589161758042846] 
+  closest label is:  exploit
+EmoBayesActor[Bob] wants to defect with similarity 0.916349590777
+EmoBayesActor[Bob] is giving 1.0 coins. (Keeping 9.0 coins.)
+%%%%%%%%%%%%%%%%%%%%  total weight:  1000.0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[-2.447455038489212, -0.11772129163642302, 0.08589161758042846] 2 [] [1, 0]
+pruning tree with action taken:  ([-2.447455038489212, -0.11772129163642302, 0.08589161758042846], 2)  and observation made:  ([], [1, 0])
+AS:  ([-2.447455038489212, -0.11772129163642302, 0.08589161758042846], 2)
+pruning tree ..
+best action:  0 distance  0.0
+best observation:  0  distance  0.0
+number of children searched  1
+best a:  0
+best o:  0
+best d:  0.0
+Alice is feeling anger with intensity 8.0
+EmoBayesActor[Bob] [-2.447455038489212, -0.11772129163642302, 0.08589161758042846] and 2 and <bayesact.State object at 0x00000000057AA550>
+EmoBayesActor[Bob] Before Message: Agent thinks it was most likely a:  child_molester
+EmoBayesActor[Bob] Before Message: Agent thought you were most likely a:  best_friend
+EmoBayesActor[Bob] Extra message received.
+EmoBayesActor[Bob] observed that Alice felt furious with EPA value [-1.66  0.06  1.72]
+EmoBayesActor[Bob] Observed that the other player felt [-1.66  0.06  1.72]
+EmoBayesActor[Bob] : Alice felt [-1.66  0.06  1.72]
+EmoBayesActor[Bob] about to prune [-2.28, -0.48, -0.84] [0, 2]
+%%%%%%%%%%%%%%%%%%%%  total weight:  8.7052426519e-65
+rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr eset
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[] 0 [-2.28, -0.48, -0.84] [0, 2]
+pruning tree with action taken:  ([], 0)  and observation made:  ([-2.28, -0.48, -0.84], [0, 2])
+AS:  ([], 0)
+pruning tree ..
+best action:  0 distance  0.0
+best observation:  3  distance  2.72661149819
+number of children searched  34
+best a:  0
+best o:  3
+best d:  2.72661149819
+EmoBayesActor[Bob] After Message: Agent thinks it is most likely a:  child_molester
+EmoBayesActor[Bob] After Message: Agent thought you are most likely a:  best_friend
+----- End of turn 7 results -----
+1.0
+Alice has 49.0 coins.
+EmoBayesActor[Bob] has 62.5 coins.
+
+-------------------------------------------
+---------- Turn 8 ------------------------
+Alice is taking turn 8
+Alice is giving 1.0 coins. (Keeping 9.0 coins.)
+EmoBayesActor[Bob] is taking turn 8
+myopic version:  [-2.02331724861357, -0.15295760601217018, 0.4572647354226022]  paab:  1
+calling pomcp search
+searched  482  iterations of POMCP_search
+pomcp version:  [-2.5155407898138504, -0.4401281978492586, 0.4056925742113139]   2   has value:  39.057474147
+EmoBayesActor[Bob]  aab: [-2.5155407898138504, -0.4401281978492586, 0.4056925742113139]
+EmoBayesActor[Bob]  suggested action for the agent is : [-2.5155407898138504, -0.4401281978492586, 0.4056925742113139] 
+  closest label is:  bully
+EmoBayesActor[Bob] wants to defect with similarity 0.875324642494
+EmoBayesActor[Bob] is giving 1.0 coins. (Keeping 9.0 coins.)
+%%%%%%%%%%%%%%%%%%%%  total weight:  1000.0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[-2.5155407898138504, -0.4401281978492586, 0.4056925742113139] 2 [] [1, 0]
+pruning tree with action taken:  ([-2.5155407898138504, -0.4401281978492586, 0.4056925742113139], 2)  and observation made:  ([], [1, 0])
+AS:  ([-2.5155407898138504, -0.4401281978492586, 0.4056925742113139], 2)
+pruning tree ..
+best action:  0 distance  0.0
+best observation:  0  distance  0.0
+number of children searched  1
+best a:  0
+best o:  0
+best d:  0.0
+EmoBayesActor[Bob] [-2.5155407898138504, -0.4401281978492586, 0.4056925742113139] and 2 and <bayesact.State object at 0x000000000585CE48>
+EmoBayesActor[Bob] about to prune [-2.28, -0.48, -0.84] [0, 2]
+%%%%%%%%%%%%%%%%%%%%  total weight:  0.0435678180371
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[] 0 [-2.28, -0.48, -0.84] [0, 2]
+pruning tree with action taken:  ([], 0)  and observation made:  ([-2.28, -0.48, -0.84], [0, 2])
+AS:  ([], 0)
+pruning tree ..
+best action:  0 distance  0.0
+best observation:  21  distance  2.79480676894
+number of children searched  39
+best a:  0
+best o:  21
+best d:  2.79480676894
+----- End of turn 8 results -----
+1.0
+Alice has 54.5 coins.
+EmoBayesActor[Bob] has 68.0 coins.
+
+-------------------------------------------
+---------- Turn 9 ------------------------
+Alice is taking turn 9
+Alice is giving 1.0 coins. (Keeping 9.0 coins.)
+EmoBayesActor[Bob] is taking turn 9
+myopic version:  [-1.6809323194839236, 0.20228918961437972, 0.2028906909846506]  paab:  1
+calling pomcp search
+searched  527  iterations of POMCP_search
+pomcp version:  [-1.869704849384344, -0.33765981665887296, 0.4049229758749405]   2   has value:  37.5911210483
+EmoBayesActor[Bob]  aab: [-1.869704849384344, -0.33765981665887296, 0.4049229758749405]
+EmoBayesActor[Bob]  suggested action for the agent is : [-1.869704849384344, -0.33765981665887296, 0.4049229758749405] 
+  closest label is:  insult
+EmoBayesActor[Bob] wants to defect with similarity 0.848993070192
+EmoBayesActor[Bob] is giving 2.0 coins. (Keeping 8.0 coins.)
+%%%%%%%%%%%%%%%%%%%%  total weight:  1000.0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[-1.869704849384344, -0.33765981665887296, 0.4049229758749405] 2 [] [1, 0]
+pruning tree with action taken:  ([-1.869704849384344, -0.33765981665887296, 0.4049229758749405], 2)  and observation made:  ([], [1, 0])
+AS:  ([-1.869704849384344, -0.33765981665887296, 0.4049229758749405], 2)
+pruning tree ..
+best action:  0 distance  0.0
+best observation:  0  distance  0.0
+number of children searched  1
+best a:  0
+best o:  0
+best d:  0.0
+EmoBayesActor[Bob] [-1.869704849384344, -0.33765981665887296, 0.4049229758749405] and 2 and <bayesact.State object at 0x000000000586A358>
+EmoBayesActor[Bob] about to prune [-2.28, -0.48, -0.84] [0, 2]
+%%%%%%%%%%%%%%%%%%%%  total weight:  0.0743367459953
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[] 0 [-2.28, -0.48, -0.84] [0, 2]
+pruning tree with action taken:  ([], 0)  and observation made:  ([-2.28, -0.48, -0.84], [0, 2])
+AS:  ([], 0)
+pruning tree ..
+best action:  0 distance  0.0
+best observation:  2  distance  3.51276338301
+number of children searched  40
+best a:  0
+best o:  2
+best d:  3.51276338301
+----- End of turn 9 results -----
+2.0
+Alice has 61.0 coins.
+EmoBayesActor[Bob] has 73.0 coins.
+
+-------------------------------------------
+---------- Turn 10 ------------------------
+Alice is taking turn 10
+Alice is giving 2.0 coins. (Keeping 8.0 coins.)
+EmoBayesActor[Bob] is taking turn 10
+myopic version:  [-1.8267808619018056, -0.1812593996376811, 0.45278373946014405]  paab:  1
+calling pomcp search
+searched  509  iterations of POMCP_search
+pomcp version:  [-1.7417313855624506, -0.05724603256615904, 0.15636009957623806]   2   has value:  37.6347540355
+EmoBayesActor[Bob]  aab: [-1.7417313855624506, -0.05724603256615904, 0.15636009957623806]
+EmoBayesActor[Bob]  suggested action for the agent is : [-1.7417313855624506, -0.05724603256615904, 0.15636009957623806] 
+  closest label is:  scowl_at
+EmoBayesActor[Bob] wants to defect with similarity 0.892407404654
+EmoBayesActor[Bob] is giving 1.0 coins. (Keeping 9.0 coins.)
+%%%%%%%%%%%%%%%%%%%%  total weight:  1000.0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[-1.7417313855624506, -0.05724603256615904, 0.15636009957623806] 2 [] [1, 0]
+pruning tree with action taken:  ([-1.7417313855624506, -0.05724603256615904, 0.15636009957623806], 2)  and observation made:  ([], [1, 0])
+AS:  ([-1.7417313855624506, -0.05724603256615904, 0.15636009957623806], 2)
+pruning tree ..
+best action:  0 distance  0.0
+best observation:  0  distance  0.0
+number of children searched  1
+best a:  0
+best o:  0
+best d:  0.0
+Alice is feeling anger with intensity 9.0
+EmoBayesActor[Bob] [-1.7417313855624506, -0.05724603256615904, 0.15636009957623806] and 2 and <bayesact.State object at 0x0000000005A04EB8>
+EmoBayesActor[Bob] Before Message: Agent thinks it was most likely a:  child_molester
+EmoBayesActor[Bob] Before Message: Agent thought you were most likely a:  best_friend
+EmoBayesActor[Bob] Extra message received.
+EmoBayesActor[Bob] observed that Alice felt irate with EPA value [-1.31  0.37  1.41]
+EmoBayesActor[Bob] Observed that the other player felt [-1.31  0.37  1.41]
+EmoBayesActor[Bob] : Alice felt [-1.31  0.37  1.41]
+EmoBayesActor[Bob] about to prune [-2.28, -0.48, -0.84] [0, 2]
+%%%%%%%%%%%%%%%%%%%%  total weight:  8.17053895405e-42
+rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr eset
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[] 0 [-2.28, -0.48, -0.84] [0, 2]
+pruning tree with action taken:  ([], 0)  and observation made:  ([-2.28, -0.48, -0.84], [0, 2])
+AS:  ([], 0)
+pruning tree ..
+best action:  0 distance  0.0
+best observation:  32  distance  2.83389820079
+number of children searched  39
+best a:  0
+best o:  32
+best d:  2.83389820079
+EmoBayesActor[Bob] After Message: Agent thinks it is most likely a:  child_molester
+EmoBayesActor[Bob] After Message: Agent thought you are most likely a:  best_friend
+----- End of turn 10 results -----
+1.0
+Alice has 66.0 coins.
+EmoBayesActor[Bob] has 79.5 coins.
+
+-------------------------------------------
+---------- Turn 11 ------------------------
+Alice is taking turn 11
+Alice is giving 1.0 coins. (Keeping 9.0 coins.)
+EmoBayesActor[Bob] is taking turn 11
+myopic version:  [-1.9419542788234687, 0.17702033086423782, 0.6131574761621404]  paab:  1
+calling pomcp search
+searched  495  iterations of POMCP_search
+pomcp version:  [-2.040022214431242, -0.021534910631710605, 0.5074148226318975]   2   has value:  38.570719219
+EmoBayesActor[Bob]  aab: [-2.040022214431242, -0.021534910631710605, 0.5074148226318975]
+EmoBayesActor[Bob]  suggested action for the agent is : [-2.040022214431242, -0.021534910631710605, 0.5074148226318975] 
+  closest label is:  bully
+EmoBayesActor[Bob] wants to defect with similarity 0.813413745311
+EmoBayesActor[Bob] is giving 2.0 coins. (Keeping 8.0 coins.)
+%%%%%%%%%%%%%%%%%%%%  total weight:  1000.0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[-2.040022214431242, -0.021534910631710605, 0.5074148226318975] 2 [] [1, 0]
+pruning tree with action taken:  ([-2.040022214431242, -0.021534910631710605, 0.5074148226318975], 2)  and observation made:  ([], [1, 0])
+AS:  ([-2.040022214431242, -0.021534910631710605, 0.5074148226318975], 2)
+pruning tree ..
+best action:  0 distance  0.0
+best observation:  0  distance  0.0
+number of children searched  1
+best a:  0
+best o:  0
+best d:  0.0
+EmoBayesActor[Bob] [-2.040022214431242, -0.021534910631710605, 0.5074148226318975] and 2 and <bayesact.State object at 0x0000000005B05278>
+EmoBayesActor[Bob] about to prune [-2.28, -0.48, -0.84] [0, 2]
+%%%%%%%%%%%%%%%%%%%%  total weight:  0.032396261478
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[] 0 [-2.28, -0.48, -0.84] [0, 2]
+pruning tree with action taken:  ([], 0)  and observation made:  ([-2.28, -0.48, -0.84], [0, 2])
+AS:  ([], 0)
+pruning tree ..
+best action:  0 distance  0.0
+best observation:  13  distance  3.48394896822
+number of children searched  34
+best a:  0
+best o:  13
+best d:  3.48394896822
+----- End of turn 11 results -----
+2.0
+Alice has 72.5 coins.
+EmoBayesActor[Bob] has 84.5 coins.
+
+-------------------------------------------
+---------- Turn 12 ------------------------
+Alice is taking turn 12
+Alice is giving 2.0 coins. (Keeping 8.0 coins.)
+EmoBayesActor[Bob] is taking turn 12
+myopic version:  [-1.8967354331304003, 0.04237043094487496, 0.43555617520176043]  paab:  1
+calling pomcp search
+searched  572  iterations of POMCP_search
+pomcp version:  [-1.9421692512946132, -0.4930042600956172, 0.0840982193533445]   2   has value:  37.6372007966
+EmoBayesActor[Bob]  aab: [-1.9421692512946132, -0.4930042600956172, 0.0840982193533445]
+EmoBayesActor[Bob]  suggested action for the agent is : [-1.9421692512946132, -0.4930042600956172, 0.0840982193533445] 
+  closest label is:  demean
+EmoBayesActor[Bob] wants to defect with similarity 0.924889221114
+EmoBayesActor[Bob] is giving 1.0 coins. (Keeping 9.0 coins.)
+%%%%%%%%%%%%%%%%%%%%  total weight:  1000.0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[-1.9421692512946132, -0.4930042600956172, 0.0840982193533445] 2 [] [1, 0]
+pruning tree with action taken:  ([-1.9421692512946132, -0.4930042600956172, 0.0840982193533445], 2)  and observation made:  ([], [1, 0])
+AS:  ([-1.9421692512946132, -0.4930042600956172, 0.0840982193533445], 2)
+pruning tree ..
+best action:  0 distance  0.0
+best observation:  0  distance  0.0
+number of children searched  1
+best a:  0
+best o:  0
+best d:  0.0
+EmoBayesActor[Bob] [-1.9421692512946132, -0.4930042600956172, 0.0840982193533445] and 2 and <bayesact.State object at 0x0000000005770D30>
+EmoBayesActor[Bob] about to prune [-2.28, -0.48, -0.84] [0, 2]
+%%%%%%%%%%%%%%%%%%%%  total weight:  0.067288866774
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[] 0 [-2.28, -0.48, -0.84] [0, 2]
+pruning tree with action taken:  ([], 0)  and observation made:  ([-2.28, -0.48, -0.84], [0, 2])
+AS:  ([], 0)
+pruning tree ..
+best action:  0 distance  0.0
+best observation:  23  distance  1.89444508255
+number of children searched  39
+best a:  0
+best o:  23
+best d:  1.89444508255
+----- End of turn 12 results -----
+1.0
+Alice has 77.5 coins.
+EmoBayesActor[Bob] has 91.0 coins.
+
+-------------------------------------------
+---------- Turn 13 ------------------------
+Alice is taking turn 13
+Alice is giving 1.0 coins. (Keeping 9.0 coins.)
+EmoBayesActor[Bob] is taking turn 13
+myopic version:  [-2.020389888515162, 0.17892364517031972, 0.7737174376238736]  paab:  1
+calling pomcp search
+searched  519  iterations of POMCP_search
+pomcp version:  [-2.114663985352073, 0.32920695514899934, 0.26489697312873495]   2   has value:  38.0158815902
+EmoBayesActor[Bob]  aab: [-2.114663985352073, 0.32920695514899934, 0.26489697312873495]
+EmoBayesActor[Bob]  suggested action for the agent is : [-2.114663985352073, 0.32920695514899934, 0.26489697312873495] 
+  closest label is:  torment
+EmoBayesActor[Bob] wants to defect with similarity 0.831461547895
+EmoBayesActor[Bob] is giving 2.0 coins. (Keeping 8.0 coins.)
+%%%%%%%%%%%%%%%%%%%%  total weight:  1000.0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[-2.114663985352073, 0.32920695514899934, 0.26489697312873495] 2 [] [1, 0]
+pruning tree with action taken:  ([-2.114663985352073, 0.32920695514899934, 0.26489697312873495], 2)  and observation made:  ([], [1, 0])
+AS:  ([-2.114663985352073, 0.32920695514899934, 0.26489697312873495], 2)
+pruning tree ..
+best action:  0 distance  0.0
+best observation:  0  distance  0.0
+number of children searched  1
+best a:  0
+best o:  0
+best d:  0.0
+EmoBayesActor[Bob] [-2.114663985352073, 0.32920695514899934, 0.26489697312873495] and 2 and <bayesact.State object at 0x00000000057707F0>
+EmoBayesActor[Bob] about to prune [-2.28, -0.48, -0.84] [0, 2]
+%%%%%%%%%%%%%%%%%%%%  total weight:  0.085925043328
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[] 0 [-2.28, -0.48, -0.84] [0, 2]
+pruning tree with action taken:  ([], 0)  and observation made:  ([-2.28, -0.48, -0.84], [0, 2])
+AS:  ([], 0)
+pruning tree ..
+best action:  0 distance  0.0
+best observation:  12  distance  2.90140480606
+number of children searched  37
+best a:  0
+best o:  12
+best d:  2.90140480606
+----- End of turn 13 results -----
+2.0
+Alice has 84.0 coins.
+EmoBayesActor[Bob] has 96.0 coins.
+
+-------------------------------------------
+Done!
