@@ -363,25 +363,25 @@ class EmoBayesActor(object):
         elif(emotion == "disappointment"):
             if(intensity == 0):
                 result = "no emotion"
-            elif (intensity == 1):
-                result = "upset"
-            elif (intensity == 2):
-                result = "distressed"
-            elif (intensity == 3):
-                result = "unhappy"
-            elif (intensity == 4):
-                result = "discouraged"                
-            elif (intensity == 5):
-                result = "disappointed"
-            elif (intensity == 6):
-                result = "discontented"
-            elif (intensity == 7):
-                result = "downhearted"
-            elif (intensity == 8):
-                result = "frustrated"
-            elif (intensity == 9):
-                result = "dissatisfied"
             elif (intensity == 10):
+                result = "upset"
+            elif (intensity == 9):
+                result = "distressed"
+            elif (intensity == 8):
+                result = "unhappy"
+            elif (intensity == 7):
+                result = "discouraged"                
+            elif (intensity == 6):
+                result = "disappointed"
+            elif (intensity == 5):
+                result = "discontented"
+            elif (intensity == 4):
+                result = "downhearted"
+            elif (intensity == 3):
+                result = "frustrated"
+            elif (intensity == 2):
+                result = "dissatisfied"
+            elif (intensity == 1):
                 result = "depressed"
         else:
             result = "no emotion"
