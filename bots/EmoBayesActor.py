@@ -6,7 +6,7 @@ Created on Mar 2, 2016
 
 
 from bayesactemot import *
-
+from sympy import *
 
 class EmoBayesActor(object):
     
@@ -174,9 +174,14 @@ class EmoBayesActor(object):
         #get the action, find which it is closest to: co-operate, or defect
         #if, e.g. cooperate is closest, give a percentage of coins based on distance to cooperate
         #e.g., if cooperate is suggested explicitly, give 10
-        #if defect is suggested, give 0        
-        coopDist = math.sqrt(raw_dist(self.coopVect,learn_aab))
-        defectDist = math.sqrt(raw_dist(self.defectVect,learn_aab))
+        #if defect is suggested, give 0  
+              
+        #coopDist = math.sqrt(raw_dist(self.coopVect,learn_aab))
+        #defectDist = math.sqrt(raw_dist(self.defectVect,learn_aab))
+        
+        toGive = self.determineAmountToGive(learn_aab)
+        
+        '''
         percent = 0
         if(coopDist < defectDist):
             #cooperate
@@ -189,6 +194,7 @@ class EmoBayesActor(object):
             print self.longName,"wants to defect with similarity",percent 
             
             toGive = abs(round((1-percent) * 10))
+        '''
         
         self.last_aab = learn_aab
         self.last_paab = learn_paab
@@ -200,7 +206,42 @@ class EmoBayesActor(object):
         self.learn_avgs=self.agent.propagate_forward(self.last_aab,learn_observ,learn_xobserv,self.last_paab)        
         
         return toGive
+    
+    def determineAmountToGive(self, learn_aab):
+        #compute line between collab and abadon
+        collabPoint = Point3D(self.coopVect[0], self.coopVect[1], self.coopVect[2])
+        abandonPoint = Point3D(self.defectVect[0], self.defectVect[0], self.defectVect[0])
         
+        line = Line3D(collabPoint, abandonPoint)
+        
+        #find distance to closest point on line
+        suggestedPoint = Point3D(learn_aab[0],learn_aab[1],learn_aab[2])
+        closestPointOnLine = line.projection(suggestedPoint)
+        
+        distanceFromProjToCollab = collabPoint.distance(closestPointOnLine)
+        distanceFromProjToAbandon = abandonPoint.distance(closestPointOnLine)
+        
+        distanceFromCollabToAbandon = collabPoint.distance(abandonPoint)
+        
+        if(distanceFromProjToCollab < distanceFromProjToAbandon):
+            #closer to collaborate
+            
+            if((distanceFromProjToCollab + distanceFromProjToAbandon) > distanceFromCollabToAbandon):
+                #past collaborate, in the direction away from abandon
+                toGive = 10
+            else:
+                percent = distanceFromProjToCollab/distanceFromCollabToAbandon
+                toGive = round(percent * 10)               
+        else:
+            if((distanceFromProjToCollab + distanceFromProjToAbandon) > distanceFromCollabToAbandon):
+                #past abandon, in the direction away from collaborate
+                toGive = 0
+            else:
+                percent = distanceFromProjToAbandon/distanceFromCollabToAbandon
+                toGive = round(percent * 10)
+        
+        return toGive
+    
     def updateScore(self, numReceived, numKept):
         self.score = self.score + numReceived + (0.5 * numKept)
         
