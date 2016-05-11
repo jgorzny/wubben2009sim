@@ -90,7 +90,7 @@ class EmoBayesActor(object):
 
         learn_initx=[initial_learn_turn,initial_px]
 
-        use_pomcp = True
+        use_pomcp = False
         pomcp_timeout = params[4]
 
         (learn_tau_init,learn_prop_init,learn_beta_client_init,learn_beta_agent_init)=init_id(agent_knowledge,agent_id,client_id,true_client_id)
@@ -176,7 +176,7 @@ class EmoBayesActor(object):
         #coopDist = math.sqrt(raw_dist(self.coopVect,learn_aab))
         #defectDist = math.sqrt(raw_dist(self.defectVect,learn_aab))
         
-        toGive = self.determineAmountToGive(learn_aab)
+        toGive = self.determineAmountToGiveProbabilityRatio(learn_aab)
         
         '''
         percent = 0
@@ -201,6 +201,24 @@ class EmoBayesActor(object):
         learn_xobserv = [State.turnnames.index("client"),0]#[1]#[State.turnnames.index("agent"),1] #[1]
         learn_observ = []
         self.learn_avgs=self.agent.propagate_forward(self.last_aab,learn_observ,learn_xobserv,self.last_paab)        
+        
+        return toGive
+    
+    def determineAmountToGiveProbabilityRatio(self, learn_aab):
+        collabPoint = Point3D(self.coopVect[0], self.coopVect[1], self.coopVect[2])
+        abandonPoint = Point3D(self.defectVect[0], self.defectVect[0], self.defectVect[0])
+        
+        suggestedPoint = Point3D(learn_aab[0],learn_aab[1],learn_aab[2])
+        
+        cd = float(suggestedPoint.distance(collabPoint))
+        ad = float(suggestedPoint.distance(abandonPoint))
+        
+        scaleFactor = float(float(-1)/float(16))
+        ratio = float(float(math.exp(scaleFactor * cd * cd))/float(math.exp(scaleFactor * ad * ad)))
+        
+        amount = float(float(float(10)*ratio)/float(float(1)+ratio))
+        toGive = round(amount)
+        #toGive = toGive = round(percent * 10)
         
         return toGive
     
