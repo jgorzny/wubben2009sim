@@ -276,13 +276,17 @@ if __name__ == "__main__":
     sys.stdout = oldstdout
     ''' #Example:
     print "Starting similar"
-    runExperiment("similar", 100, 0.78, "D:\Research Data\CS886\Wubben2009", 5.0, "NA")
+    runExperiment("similar", 100, 0.78, "D:\Research Data\CS886\Wubben2009", 5.0, "undergraduate")
     sys.stdout = oldstdout
     '''
 
-    print "Starting test"
-    runExperiment("test-no-cosine", 3, 0.5, "D:\Research Data\CS886\Wubben2009", 5.0, "NA")
+    print "Starting experiment"
+    runExperiment("testing", 3, 0.5, "D:\Research Data\CS886\Wubben2009", 1.0, "NA")
     sys.stdout = oldstdout
+    
+    #print "Starting fixed experiment-large"
+    #runExperiment("first-fix-large", 1000, 0.5, "D:\Research Data\CS886\Wubben2009", 5.0, "NA")
+    #sys.stdout = oldstdout
     
     #computeTtests()
     

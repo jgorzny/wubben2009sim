@@ -29,13 +29,10 @@ class EmoBayesActor(object):
         
         #BayesAct initialization follows        
                 
-        #num_games = 10
         self.num_samples = 1000
         initial_px = [1.0,0.0,0.0]
 
         initial_learn_turn = "agent"
-
-        #action_names = ["wait","cooperate","defect"]
 
         agent_gender=params[1]
         print self.longName, "gender is:", agent_gender
@@ -220,6 +217,8 @@ class EmoBayesActor(object):
         
         distanceFromProjToCollab = collabPoint.distance(closestPointOnLine)
         distanceFromProjToAbandon = abandonPoint.distance(closestPointOnLine)
+        
+        print("Projected distance to collab, abandon",distanceFromProjToCollab, distanceFromProjToAbandon)
         
         distanceFromCollabToAbandon = collabPoint.distance(abandonPoint)
         

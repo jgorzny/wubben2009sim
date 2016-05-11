@@ -38,8 +38,10 @@ def TfTvsEmoBayesActor(tftEmotion, bayesGender, bayesID, timeout):
         bayesPlayer.updateScore(tftGives, 10-bayesGives)
         
         tftPlayer.updateLastAction(bayesGives)
+        tftPlayer.increaseShortVals(bayesGives, 10)
         
         if(i%3 == 1 and i < 13):
+            print("TFT emotion intensity:",tftPlayer.reportEmotionIntensity())
             ei1 = round(tftPlayer.reportEmotionIntensity()*10)
 
             print(tftPlayer.name + " is feeling " + tftPlayer.emotion + " with intensity " + str(ei1) )
@@ -57,7 +59,7 @@ def TfTvsEmoBayesActor(tftEmotion, bayesGender, bayesID, timeout):
         bayesPlayer.reportScore()
         print 30*""
         
-        tftPlayer.increaseShortVals(bayesGives, 10)        
+                
         
             
         

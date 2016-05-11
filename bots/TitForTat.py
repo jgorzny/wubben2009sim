@@ -64,7 +64,8 @@ class TitForTat(object):
         if(self.shortMax == 0):
             return float(0)
         else:
-            return float(1)-(float(self.shortScore)/float(self.shortMax))
+            print("Computing intensity:",self.shortScore,self.shortMax)
+            return float(1)-float(float(self.shortScore)/float(self.shortMax))
         
     def reportScore(self):
         print(self.name + " has " + str(self.score) + " coins.")
