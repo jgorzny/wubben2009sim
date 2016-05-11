@@ -79,13 +79,13 @@ class EmoBayesActor(object):
 
     #one of two possible identities for both
         if agent_knowledge == 5:
-            client_id.append(NP.asarray([[2.75, 1.88, 1.38]]).transpose())
-            client_id.append(NP.asarray([[-2.15, -0.21, -0.54]]).transpose())
+            client_id.append(NP.asarray([true_client_id]).transpose())
+            client_id.append(NP.asarray([true_client_id]).transpose())
     
             agent_id = []
             agent_id.append(NP.asarray([agent_id_epa]).transpose())
         #comment the next line out if we know the agent is a friend only
-            agent_id.append(NP.asarray([[-2.15, -0.21, -0.54]]).transpose())
+            agent_id.append(NP.asarray([agent_id_epa]).transpose())
 
 
         learn_initx=[initial_learn_turn,initial_px]
