@@ -36,7 +36,7 @@ class EmoBayesActor(object):
 
         agent_gender=params[1]
         print self.longName, "gender is:", agent_gender
-        #client_gender="male"
+        client_gender=params[1] #For now, gender is the same
 
         fbfname = "D:\\Libraries\\Python\\bayesact-0.5.1\\fbehaviours.dat"
         fifname = "D:\\Libraries\\Python\\bayesact-0.5.1\\fidentities.dat"
@@ -44,18 +44,18 @@ class EmoBayesActor(object):
         self.fbehaviours_agent=readSentiments(fbfname,agent_gender)
         #fbehaviours_client=readSentiments(fbfname,client_gender)
     
-    #(agent_mean_ids,agent_cov_ids)=getIdentityStats(fifname,agent_gender)
-    #(client_mean_ids,client_cov_ids)=getIdentityStats(fifname,client_gender)
-
+        #(agent_mean_ids,agent_cov_ids)=getIdentityStats(fifname,agent_gender)
+        #(client_mean_ids,client_cov_ids)=getIdentityStats(fifname,client_gender)
         '''
         agent_id = params[2] #"friend"
-    #agent_id=getIdentity(fifname,agent_id,agent_gender)
-    #if agent_id==[]:
-    #    agent_id=NP.random.multivariate_normal(agent_mean_ids,agent_cov_ids)
+        #agent_id=getIdentity(fifname,agent_id,agent_gender)
+        #if agent_id==[]:
+        #    agent_id=NP.random.multivariate_normal(agent_mean_ids,agent_cov_ids)
         print self.longName,"agent id is: ",agent_id
 
         agent_id=NP.asarray([agent_id]).transpose()
-    '''
+        '''
+        
         agent_id = params[2]
         agent_id=getIdentity(fifname,agent_id,agent_gender)
         agent_id_epa = agent_id
@@ -72,8 +72,12 @@ class EmoBayesActor(object):
     #agent_knowledge = 0
         agent_knowledge = 5
 
-
-        true_client_id = [2.75, 1.88, 1.38] #friend  
+        bayesClientID=params[6]
+        client_id_b=getIdentity(fifname,bayesClientID,client_gender)
+        client_id_epa = client_id_b
+        print self.longName,"client id is: ",client_id_b,"(",bayesClientID,")"
+        true_client_id = client_id_epa
+        #true_client_id = [2.75, 1.88, 1.38] #friend  
     #true_client_id = [-1.95,-0.92,-1.34]  #loser
     #true_client_id = [-2.15, -0.21, -0.54] #scrooge
 
@@ -90,7 +94,7 @@ class EmoBayesActor(object):
 
         learn_initx=[initial_learn_turn,initial_px]
 
-        use_pomcp = False
+        use_pomcp = params[5]
         pomcp_timeout = params[4]
 
         (learn_tau_init,learn_prop_init,learn_beta_client_init,learn_beta_agent_init)=init_id(agent_knowledge,agent_id,client_id,true_client_id)

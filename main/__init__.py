@@ -17,17 +17,21 @@ def main():
         tftEmotion = argv[0]
         bayesGender = argv[1]
         bayesID = argv[2]
+        usePOMCP=argv[3]
+        bayesClientID=argv[4]
     else:
         bayesGender = "male"
         bayesID = "friend"
         tftEmotion = "anger"
+        usePOMCP=True
+        bayesClientID="friend"
     
-    TfTvsEmoBayesActor(tftEmotion, bayesGender, bayesID)
+    TfTvsEmoBayesActor(tftEmotion, bayesGender, bayesID, usePOMCP,bayesClientID)
     
-def TfTvsEmoBayesActor(tftEmotion, bayesGender, bayesID, timeout):
+def TfTvsEmoBayesActor(tftEmotion, bayesGender, bayesID, timeout, usePOMCP, bayesClientID):
     print("Starting a game.")
     tftPlayer = TitForTat(["Alice", tftEmotion])
-    bayesPlayer = EmoBayesActor(["Bob", bayesGender, bayesID, "Alice", timeout])
+    bayesPlayer = EmoBayesActor(["Bob", bayesGender, bayesID, "Alice", timeout, usePOMCP,bayesClientID])
     
     for i in range(0,14):
         print("---------- Turn " + str(i) + " ------------------------")

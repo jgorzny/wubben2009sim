@@ -12,7 +12,7 @@ import sys
 import numpy
 import scipy.stats as stats
 
-def runExperiment(eName, N, p, path, timeout, idIn): 
+def runExperiment(eName, N, p, path, timeout, idIn, usePOMCP,clientIDIn): 
     
     #First, we choose N identities, and set them to be female with probability p
 
@@ -20,6 +20,7 @@ def runExperiment(eName, N, p, path, timeout, idIn):
     idFile = "D:\\Libraries\\Python\\bayesact-emot-supplemental\\bactfiles\\fidentities.dat"
     
     ids = chooseIdentities(N, idFile)
+    clientIDs = chooseIdentities(N, idFile)
 
     name = "Experiment " + eName + " " +time.strftime("%d-%m-%Y") + "-" + time.strftime("%H-%M")
     directory = path + "\\" + name
@@ -64,6 +65,11 @@ def runExperiment(eName, N, p, path, timeout, idIn):
         else:
             bayesID=idIn
             
+        if(clientIDIn=="NA"):
+            bayesClientID=clientIDs[i]
+        else:
+            bayesClientID=clientIDIn
+            
         emoGroup = random.choice(["none","anger","disappointment"])
         
         if(emoGroup == "anger"):
@@ -86,7 +92,7 @@ def runExperiment(eName, N, p, path, timeout, idIn):
         
         #redirect this output to 'specificLogFile'
         sys.stdout = open(specificLogFile, 'w')
-        TfTvsEmoBayesActor(emoGroup, gender, bayesID, timeout)
+        TfTvsEmoBayesActor(emoGroup, gender, bayesID, timeout, usePOMCP, bayesClientID)
         
     logFile.write("Number of males: " + str(numMale) + "\n")
     logFile.write("Number of females: " + str(numFemale) + "\n")
@@ -281,9 +287,12 @@ if __name__ == "__main__":
     '''
 
     print "Starting experiment"
-    runExperiment("testing", 3, 0.5, "D:\Research Data\CS886\Wubben2009", 1.0, "NA")
+    runExperiment("after-fix-two-no-pomcp-undergrad-undergrad", 100, 0.5, "D:\Research Data\CS886\Wubben2009", 1.0, "undergraduate", False,"undergraduate")
     sys.stdout = oldstdout
     
+    print "Starting experiment 2"
+    runExperiment("after-fix-two-pomcp-undergrad-undergrad", 100, 0.5, "D:\Research Data\CS886\Wubben2009", 1.0, "undergraduate", True,"undergraduate")
+    sys.stdout = oldstdout    
     #print "Starting fixed experiment-large"
     #runExperiment("first-fix-large", 1000, 0.5, "D:\Research Data\CS886\Wubben2009", 5.0, "NA")
     #sys.stdout = oldstdout
