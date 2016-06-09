@@ -171,7 +171,7 @@ class EmoBayesActor(object):
         
                
         print self.longName," suggested action for the agent is :",learn_aab,"\n  closest label is: ",aact
-        #print "agent propositional action : ",learn_paab #not needed?
+        print "agent propositional action : ",learn_paab #not needed?
         
         #get the action, find which it is closest to: co-operate, or defect
         #if, e.g. cooperate is closest, give a percentage of coins based on distance to cooperate
@@ -305,6 +305,45 @@ class EmoBayesActor(object):
         print self.longName,"about to prune",learn_observ,learn_xobserv
         self.learn_avgs=self.agent.propagate_forward([],learn_observ,learn_xobserv,0) #self.last_paab
         
+    def newObservVals(self, num, learn_xobserv):
+        collabVect = [1.44, 1.11, 0.61]
+        abandonVect = [-2.28, -0.48, -0.84]
+        
+        if (num == 10):
+            learn_observ = collabVect
+            learn_xobserv[1] = 1
+        elif (num == 9):
+            learn_observ = collabVect
+            learn_xobserv[1] = 2
+        elif (num == 8):
+            learn_observ = collabVect
+            learn_xobserv[1] = 3
+        elif (num == 7):
+            learn_observ = collabVect
+            learn_xobserv[1] = 4  
+        elif (num == 6):
+            learn_observ = collabVect
+            learn_xobserv[1] = 5
+        elif (num == 5):
+            learn_observ = collabVect
+            learn_xobserv[1] = 6
+        elif (num == 4):
+            learn_observ = collabVect
+            learn_xobserv[1] = 7                        
+        elif (num == 3):
+            learn_observ = collabVect
+            learn_xobserv[1] = 8
+        elif (num == 2):
+            learn_observ = collabVect
+            learn_xobserv[1] = 9
+        elif (num == 1):
+            learn_observ = collabVect
+            learn_xobserv[1] = 10
+        else:
+            learn_observ = collabVect
+            learn_xobserv[1] = 11
+            
+        return (learn_observ, learn_xobserv)          
     def updateLastActionWithEmotion(self, numReceived, intensity, emotion):
         self.lastAction = numReceived
 
@@ -327,12 +366,15 @@ class EmoBayesActor(object):
         collabVect = [1.44, 1.11, 0.61]
         abandonVect = [-2.28, -0.48, -0.84]
         
-        if(numReceived > 4):
-            learn_observ = collabVect
-            learn_xobserv[1] = 1
+        if constants.use_new_functions():
+            if(numReceived > 4):
+                learn_observ = collabVect
+                learn_xobserv[1] = 1
+            else:
+                learn_observ = abandonVect
+                learn_xobserv[1] = 2
         else:
-            learn_observ = abandonVect
-            learn_xobserv[1] = 2
+            (learn_observ, learn_xobserv) = self.newObservVals(numReceived, learn_xobserv)
             
         
         #TODO: need to add client's feeling here, occasionally.
@@ -1032,10 +1074,15 @@ class PDEmotAgentB(EmotionalAgent):
         xobs = sample.x[2]   #1 observations now? 
         return [sample.x[0],xobs] #no noise       #why x[0]? TODO: check
 
-
-
-    #This only used for POMCP? TODO: check.
+    
     def reward(self,sample,action=None):
+        if constants.use_new_functions():
+            return self.reward_new(sample,action)
+        else:
+            return self.reward_old(sample,action)
+
+    #def reward(self,sample,action=None):#old
+    def reward_old(self,sample,action=None):#old
         # a generic deflection-based reward that can be removed eventually
         #fsample=sample.f.transpose()
         #freward = -1.0*NP.dot(sample.f-sample.tau,sample.f-sample.tau)
@@ -1052,6 +1099,7 @@ class PDEmotAgentB(EmotionalAgent):
             xreward = 1.0
             
         return xreward #+freward 
+    
 
 
 
@@ -1155,3 +1203,251 @@ class PDEmotAgentB(EmotionalAgent):
         else:
             #turns don't match, something is wrong
             return -2
+        
+    def reward_new(self,sample,action=None): #new
+    #def reward(self,sample,action=None): #new
+        if sample.x[1] == 0 or sample.x[2] == 0:   #someone has not acted
+            xreward = 0.0        
+        elif sample.x[1] == 1 and sample.x[2] == 1 :
+            xreward = 10.0
+        elif sample.x[1] == 1 and sample.x[2] == 2 :
+            xreward = 9.0
+        elif sample.x[1] == 1 and sample.x[2] == 3 :
+            xreward = 8.0
+        elif sample.x[1] == 1 and sample.x[2] == 4 :
+            xreward = 7.0
+        elif sample.x[1] == 1 and sample.x[2] == 5 :
+            xreward = 6.0
+        elif sample.x[1] == 1 and sample.x[2] == 6 :
+            xreward = 5.0
+        elif sample.x[1] == 1 and sample.x[2] == 7 :
+            xreward = 4.0
+        elif sample.x[1] == 1 and sample.x[2] == 8 :
+            xreward = 3.0
+        elif sample.x[1] == 1 and sample.x[2] == 9 :
+            xreward = 2.0
+        elif sample.x[1] == 1 and sample.x[2] == 10 :
+            xreward = 1.0
+        elif sample.x[1] == 1 and sample.x[2] == 11 :
+            xreward = 0.0
+        elif sample.x[1] == 2 and sample.x[2] == 1 :
+            xreward = 10.5
+        elif sample.x[1] == 2 and sample.x[2] == 2 :
+            xreward = 9.5
+        elif sample.x[1] == 2 and sample.x[2] == 3 :
+            xreward = 8.5
+        elif sample.x[1] == 2 and sample.x[2] == 4 :
+            xreward = 7.5
+        elif sample.x[1] == 2 and sample.x[2] == 5 :
+            xreward = 6.5
+        elif sample.x[1] == 2 and sample.x[2] == 6 :
+            xreward = 5.5
+        elif sample.x[1] == 2 and sample.x[2] == 7 :
+            xreward = 4.5
+        elif sample.x[1] == 2 and sample.x[2] == 8 :
+            xreward = 3.5
+        elif sample.x[1] == 2 and sample.x[2] == 9 :
+            xreward = 2.5
+        elif sample.x[1] == 2 and sample.x[2] == 10 :
+            xreward = 1.5
+        elif sample.x[1] == 2 and sample.x[2] == 11 :
+            xreward = 0.5
+        elif sample.x[1] == 3 and sample.x[2] == 1 :
+            xreward = 11.0
+        elif sample.x[1] == 3 and sample.x[2] == 2 :
+            xreward = 10.0
+        elif sample.x[1] == 3 and sample.x[2] == 3 :
+            xreward = 9.0
+        elif sample.x[1] == 3 and sample.x[2] == 4 :
+            xreward = 8.0
+        elif sample.x[1] == 3 and sample.x[2] == 5 :
+            xreward = 7.0
+        elif sample.x[1] == 3 and sample.x[2] == 6 :
+            xreward = 6.0
+        elif sample.x[1] == 3 and sample.x[2] == 7 :
+            xreward = 5.0
+        elif sample.x[1] == 3 and sample.x[2] == 8 :
+            xreward = 4.0
+        elif sample.x[1] == 3 and sample.x[2] == 9 :
+            xreward = 3.0
+        elif sample.x[1] == 3 and sample.x[2] == 10 :
+            xreward = 2.0
+        elif sample.x[1] == 3 and sample.x[2] == 11 :
+            xreward = 1.0
+        elif sample.x[1] == 4 and sample.x[2] == 1 :
+            xreward = 11.5
+        elif sample.x[1] == 4 and sample.x[2] == 2 :
+            xreward = 10.5
+        elif sample.x[1] == 4 and sample.x[2] == 3 :
+            xreward = 9.5
+        elif sample.x[1] == 4 and sample.x[2] == 4 :
+            xreward = 8.5
+        elif sample.x[1] == 4 and sample.x[2] == 5 :
+            xreward = 7.5
+        elif sample.x[1] == 4 and sample.x[2] == 6 :
+            xreward = 6.5
+        elif sample.x[1] == 4 and sample.x[2] == 7 :
+            xreward = 5.5
+        elif sample.x[1] == 4 and sample.x[2] == 8 :
+            xreward = 4.5
+        elif sample.x[1] == 4 and sample.x[2] == 9 :
+            xreward = 3.5
+        elif sample.x[1] == 4 and sample.x[2] == 10 :
+            xreward = 2.5
+        elif sample.x[1] == 4 and sample.x[2] == 11 :
+            xreward = 1.5
+        elif sample.x[1] == 5 and sample.x[2] == 1 :
+            xreward = 12.0
+        elif sample.x[1] == 5 and sample.x[2] == 2 :
+            xreward = 11.0
+        elif sample.x[1] == 5 and sample.x[2] == 3 :
+            xreward = 10.0
+        elif sample.x[1] == 5 and sample.x[2] == 4 :
+            xreward = 9.0
+        elif sample.x[1] == 5 and sample.x[2] == 5 :
+            xreward = 8.0
+        elif sample.x[1] == 5 and sample.x[2] == 6 :
+            xreward = 7.0
+        elif sample.x[1] == 5 and sample.x[2] == 7 :
+            xreward = 6.0
+        elif sample.x[1] == 5 and sample.x[2] == 8 :
+            xreward = 5.0
+        elif sample.x[1] == 5 and sample.x[2] == 9 :
+            xreward = 4.0
+        elif sample.x[1] == 5 and sample.x[2] == 10 :
+            xreward = 3.0
+        elif sample.x[1] == 5 and sample.x[2] == 11 :
+            xreward = 2.0
+        elif sample.x[1] == 6 and sample.x[2] == 1 :
+            xreward = 12.5
+        elif sample.x[1] == 6 and sample.x[2] == 2 :
+            xreward = 11.5
+        elif sample.x[1] == 6 and sample.x[2] == 3 :
+            xreward = 10.5
+        elif sample.x[1] == 6 and sample.x[2] == 4 :
+            xreward = 9.5
+        elif sample.x[1] == 6 and sample.x[2] == 5 :
+            xreward = 8.5
+        elif sample.x[1] == 6 and sample.x[2] == 6 :
+            xreward = 7.5
+        elif sample.x[1] == 6 and sample.x[2] == 7 :
+            xreward = 6.5
+        elif sample.x[1] == 6 and sample.x[2] == 8 :
+            xreward = 5.5
+        elif sample.x[1] == 6 and sample.x[2] == 9 :
+            xreward = 4.5
+        elif sample.x[1] == 6 and sample.x[2] == 10 :
+            xreward = 3.5
+        elif sample.x[1] == 6 and sample.x[2] == 11 :
+            xreward = 2.5
+        elif sample.x[1] == 7 and sample.x[2] == 1 :
+            xreward = 13.0
+        elif sample.x[1] == 7 and sample.x[2] == 2 :
+            xreward = 12.0
+        elif sample.x[1] == 7 and sample.x[2] == 3 :
+            xreward = 11.0
+        elif sample.x[1] == 7 and sample.x[2] == 4 :
+            xreward = 10.0
+        elif sample.x[1] == 7 and sample.x[2] == 5 :
+            xreward = 9.0
+        elif sample.x[1] == 7 and sample.x[2] == 6 :
+            xreward = 8.0
+        elif sample.x[1] == 7 and sample.x[2] == 7 :
+            xreward = 7.0
+        elif sample.x[1] == 7 and sample.x[2] == 8 :
+            xreward = 6.0
+        elif sample.x[1] == 7 and sample.x[2] == 9 :
+            xreward = 5.0
+        elif sample.x[1] == 7 and sample.x[2] == 10 :
+            xreward = 4.0
+        elif sample.x[1] == 7 and sample.x[2] == 11 :
+            xreward = 3.0
+        elif sample.x[1] == 8 and sample.x[2] == 1 :
+            xreward = 13.5
+        elif sample.x[1] == 8 and sample.x[2] == 2 :
+            xreward = 12.5
+        elif sample.x[1] == 8 and sample.x[2] == 3 :
+            xreward = 11.5
+        elif sample.x[1] == 8 and sample.x[2] == 4 :
+            xreward = 10.5
+        elif sample.x[1] == 8 and sample.x[2] == 5 :
+            xreward = 9.5
+        elif sample.x[1] == 8 and sample.x[2] == 6 :
+            xreward = 8.5
+        elif sample.x[1] == 8 and sample.x[2] == 7 :
+            xreward = 7.5
+        elif sample.x[1] == 8 and sample.x[2] == 8 :
+            xreward = 6.5
+        elif sample.x[1] == 8 and sample.x[2] == 9 :
+            xreward = 5.5
+        elif sample.x[1] == 8 and sample.x[2] == 10 :
+            xreward = 4.5
+        elif sample.x[1] == 8 and sample.x[2] == 11 :
+            xreward = 3.5
+        elif sample.x[1] == 9 and sample.x[2] == 1 :
+            xreward = 14.0
+        elif sample.x[1] == 9 and sample.x[2] == 2 :
+            xreward = 13.0
+        elif sample.x[1] == 9 and sample.x[2] == 3 :
+            xreward = 12.0
+        elif sample.x[1] == 9 and sample.x[2] == 4 :
+            xreward = 11.0
+        elif sample.x[1] == 9 and sample.x[2] == 5 :
+            xreward = 10.0
+        elif sample.x[1] == 9 and sample.x[2] == 6 :
+            xreward = 9.0
+        elif sample.x[1] == 9 and sample.x[2] == 7 :
+            xreward = 8.0
+        elif sample.x[1] == 9 and sample.x[2] == 8 :
+            xreward = 7.0
+        elif sample.x[1] == 9 and sample.x[2] == 9 :
+            xreward = 6.0
+        elif sample.x[1] == 9 and sample.x[2] == 10 :
+            xreward = 5.0
+        elif sample.x[1] == 9 and sample.x[2] == 11 :
+            xreward = 4.0
+        elif sample.x[1] == 10 and sample.x[2] == 1 :
+            xreward = 14.5
+        elif sample.x[1] == 10 and sample.x[2] == 2 :
+            xreward = 13.5
+        elif sample.x[1] == 10 and sample.x[2] == 3 :
+            xreward = 12.5
+        elif sample.x[1] == 10 and sample.x[2] == 4 :
+            xreward = 11.5
+        elif sample.x[1] == 10 and sample.x[2] == 5 :
+            xreward = 10.5
+        elif sample.x[1] == 10 and sample.x[2] == 6 :
+            xreward = 9.5
+        elif sample.x[1] == 10 and sample.x[2] == 7 :
+            xreward = 8.5
+        elif sample.x[1] == 10 and sample.x[2] == 8 :
+            xreward = 7.5
+        elif sample.x[1] == 10 and sample.x[2] == 9 :
+            xreward = 6.5
+        elif sample.x[1] == 10 and sample.x[2] == 10 :
+            xreward = 5.5
+        elif sample.x[1] == 10 and sample.x[2] == 11 :
+            xreward = 4.5
+        elif sample.x[1] == 11 and sample.x[2] == 1 :
+            xreward = 15.0
+        elif sample.x[1] == 11 and sample.x[2] == 2 :
+            xreward = 14.0
+        elif sample.x[1] == 11 and sample.x[2] == 3 :
+            xreward = 13.0
+        elif sample.x[1] == 11 and sample.x[2] == 4 :
+            xreward = 12.0
+        elif sample.x[1] == 11 and sample.x[2] == 5 :
+            xreward = 11.0
+        elif sample.x[1] == 11 and sample.x[2] == 6 :
+            xreward = 10.0
+        elif sample.x[1] == 11 and sample.x[2] == 7 :
+            xreward = 9.0
+        elif sample.x[1] == 11 and sample.x[2] == 8 :
+            xreward = 8.0
+        elif sample.x[1] == 11 and sample.x[2] == 9 :
+            xreward = 7.0
+        elif sample.x[1] == 11 and sample.x[2] == 10 :
+            xreward = 6.0
+        elif sample.x[1] == 11 and sample.x[2] == 11 :
+            xreward = 5.0
+        return xreward
