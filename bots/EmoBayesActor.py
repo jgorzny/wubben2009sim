@@ -7,6 +7,7 @@ Created on Mar 2, 2016
 
 from bayesactemot import *
 from sympy import *
+import constants
 
 class EmoBayesActor(object):
     
@@ -535,8 +536,16 @@ class EmoBayesActor(object):
    
              
 class PDEmotAgentB(EmotionalAgent):
-    ''' #old
+
+    
     def __init__(self,*args,**kwargs):
+        if constants.use_new_functions():
+            self.init_new(*args,**kwargs)
+        else:
+            self.init_old(*args,**kwargs)
+    
+    def init_old(self,*args,**kwargs):
+    #def __init__(self,*args,**kwargs):#old
 
         super(PDEmotAgentB, self).__init__(self,*args,**kwargs)
         #x for the PDEmotAgent is a tuple - see pd/pdpomdp3.spudd
@@ -563,8 +572,9 @@ class PDEmotAgentB(EmotionalAgent):
         self.client_cooppd[2] = [0.0,0.0,1.0]
 
         self.numDiscActions=3    #wait, cooperate, defect
-    '''
-    def __init__(self,*args,**kwargs):
+    
+    def init_new(self,*args,**kwargs):#new
+    #def __init__(self,*args,**kwargs):#new
 
         super(PDEmotAgentB, self).__init__(self,*args,**kwargs)
         #x for the PDEmotAgent is a tuple - see pd/pdpomdp3.spudd
@@ -618,8 +628,15 @@ class PDEmotAgentB(EmotionalAgent):
         EmotionalAgent.print_params(self)
         print "probability the client will cooperate: ",self.client_cooppd
 
-    '''#old
+    
     def initialise_x(self,initx=None):
+        if constants.use_new_functions():
+            return self.initialise_x_new(initx)
+        else:
+            return self.initialise_x_old(initx)
+    
+    #def initialise_x(self,initx=None):#old
+    def initialise_x_old(self,initx=None):#old
         if not initx:
             initpx=self.px
             initturn=State.turnnames.index("agent")  #hard-coded agent start
@@ -630,10 +647,11 @@ class PDEmotAgentB(EmotionalAgent):
         a_initx=list(NP.random.multinomial(1,initpx)).index(1)
         c_initx=list(NP.random.multinomial(1,initpx)).index(1)
         return [initturn,a_initx,c_initx]
-    '''
-        
+    
+    
     #TODO: not sure which of these variables need to change.
-    def initialise_x(self,initx=None):
+    #def initialise_x(self,initx=None):#new
+    def initialise_x_new(self,initx=None):
         if not initx:
             initpx=self.px
             initturn=State.turnnames.index("agent")  #hard-coded agent start
@@ -754,9 +772,16 @@ class PDEmotAgentB(EmotionalAgent):
     #    aab = self.get_consistent_fb(paab)
     #    return (aab,paab)
 
-    '''#old    
-    #default propositional action policy
+    
     def get_prop_action(self,state,rollout=False,samplenum=0):
+        if constants.use_new_functions():
+            return self.get_prop_action_new(state, rollout, samplenum)
+        else:
+            return self.get_prop_action_old(state, rollout, samplenum)
+            
+    #default propositional action policy
+    #def get_prop_action(self,state,rollout=False,samplenum=0):#old
+    def get_prop_action_old(self,state,rollout=False,samplenum=0):
         #for POMCP use this because it will be calling this during rollouts - this is the rollout policy
         #for propositional actions
         if self.use_pomcp:
@@ -769,9 +794,10 @@ class PDEmotAgentB(EmotionalAgent):
                 return 0  #wait
             else:
                 return 1  #cooperate
-    '''
+    
     #default propositional action policy
-    def get_prop_action(self,state,rollout=False,samplenum=0):
+    #def get_prop_action(self,state,rollout=False,samplenum=0): #new
+    def get_prop_action_new(self,state,rollout=False,samplenum=0):
         #for POMCP use this because it will be calling this during rollouts - this is the rollout policy
         #for propositional actions
         if self.use_pomcp:
@@ -784,10 +810,16 @@ class PDEmotAgentB(EmotionalAgent):
                 return 0  #wait
             else:
                 return 6  #give5 - middle of the road approach.
-               
-    ''' #old
-    #aab is the affective part of the action, paab is the propositional part
+            
     def sampleXvar(self,f,tau,state,aab,paab):
+        if constants.use_new_functions():
+            return self.sampleXvar_new(f,tau,state,aab,paab)
+        else:
+            return self.sampleXvar_old(f,tau,state,aab,paab)
+    
+    #aab is the affective part of the action, paab is the propositional part
+    #def sampleXvar(self,f,tau,state,aab,paab):#old
+    def sampleXvar_old(self,f,tau,state,aab,paab): 
         turn = state.get_turn()
         ag_play = state.x[1]
         new_ag_play = 0
@@ -849,9 +881,10 @@ class PDEmotAgentB(EmotionalAgent):
         #print [turn,state.get_turn(),ag_play,cl_play]
         #print [state.invert_turn(),new_ag_play,new_cl_play]
         return [state.invert_turn(),new_ag_play,new_cl_play]
-    '''
+    
     #aab is the affective part of the action, paab is the propositional part
-    def sampleXvar(self,f,tau,state,aab,paab):
+    #def sampleXvar(self,f,tau,state,aab,paab):#new
+    def sampleXvar_new(self,f,tau,state,aab,paab):
         turn = state.get_turn()
         ag_play = state.x[1]
         new_ag_play = 0
@@ -934,12 +967,19 @@ class PDEmotAgentB(EmotionalAgent):
             else:
                 new_ag_play = 11  #give0 
         return [state.invert_turn(),new_ag_play,new_cl_play]               
-    '''
+    
+    def evalSampleXvar(self,sample,xobs,oldsample=[]):
+        if constants.use_new_functions():
+            return self.evalSampleXvar_new(sample,xobs,oldsample)
+        else:
+            return self.evalSampleXvar_old(sample,xobs,oldsample)
+    
     #old
     #this must be in the class
     #xobs[1] is the client action observation, but its deterministic for now
     #we could implement an observation function here if not deterministic
-    def evalSampleXvar(self,sample,xobs,oldsample=[]):
+    #def evalSampleXvar(self,sample,xobs,oldsample=[]): #old
+    def evalSampleXvar_old(self,sample,xobs,oldsample=[]): #old
         turn  = sample.get_turn()
         if turn == "agent":  #this is whose turn it is *next* #confusing
             if sample.x[0]==xobs[0] and sample.x[2] == xobs[1]:  #+1 was here   #plus one?????????? I think this is right and seems to work
@@ -948,11 +988,12 @@ class PDEmotAgentB(EmotionalAgent):
                 return 0.0
         else:
             return 1.0  #we don't model agent action as observable
-    '''   
+     
     #this must be in the class
     #xobs[1] is the client action observation, but its deterministic for now
     #we could implement an observation function here if not deterministic
-    def evalSampleXvar(self,sample,xobs,oldsample=[]):
+    #def evalSampleXvar(self,sample,xobs,oldsample=[]): #new
+    def evalSampleXvar_new(self,sample,xobs,oldsample=[]):
         turn  = sample.get_turn()
         if turn == "agent":  #this is whose turn it is *next* #confusing
             if sample.x[0]==xobs[0] and sample.x[2] == xobs[1]: 
@@ -961,10 +1002,17 @@ class PDEmotAgentB(EmotionalAgent):
                 return 0.0
         else:
             return 1.0  #we don't model agent action as observable   
-    '''
+    
+    def sampleXObservation(self,sample):
+        if constants.use_new_functions():
+            return self.sampleXObservation_new(sample)
+        else:
+            return self.sampleXObservation_old(sample)
+        
     #old
     #an observation sample is [turn, client_play]
-    def sampleXObservation(self,sample):
+    #def sampleXObservation(self,sample):#old
+    def sampleXObservation_old(self,sample):
         #need to subtract one from here because sample.x[2] is 0=wait, 1=cooperate and 2=defect
         #WARNING!!! What is sample.x[2] is 0 ???  yuck yuck - there is no observation for this
         #WHY IS THIS WAIT THING EVEN HERE ??
@@ -976,9 +1024,10 @@ class PDEmotAgentB(EmotionalAgent):
         #     xobs = sample.x[2]-1
         xobs = sample.x[2]   #0,1,2 observations now
         return [sample.x[0],xobs] #no noise
-    '''
+    
     #an observation sample is [turn, client_play]
-    def sampleXObservation(self,sample):
+    def sampleXObservation_new(self,sample):
+    #def sampleXObservation(self,sample):#new
         #print sample.x
         xobs = sample.x[2]   #1 observations now? 
         return [sample.x[0],xobs] #no noise       #why x[0]? TODO: check

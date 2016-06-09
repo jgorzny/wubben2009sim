@@ -1,0 +1,51 @@
+#jgorzny: following taken from BayesAct README
+#Last updated: 8 June 2016. 
+#Some things to check with Jesse
+
+CREATING SUBCLASSES:
+you can subclass Agent and create your own types
+The only thing you need to implement is a way to
+sample from the "X" variable and the reward function
+You must include the "turn" as the first element of "X"
+
+The following methods may be overloaded in a subclass of Agent
+
+*****
+First, consruct and initialise
+-----
+__init__  : set up and initialise
+#Done I think - new vectors have length 11
+
+initialise_x : draw initial values of x
+#Done - nothing has changed. Check with Jesse
+
+*****
+Then , you need to handle sampling from X, generating X observations, and 
+evaluating X states given X observations
+-----
+sampleXvar(self,f,tau,state,aab,paab=None)
+#Updated branching, which should result in a tit-for-tat like bot? Some lines 
+to check with Jesse
+
+evalSampleXvar(self,sample,xobs)
+#No idea what to change - check with Jesse.
+
+sampleXObservation(self,s)
+#Updated one value; likely insufficient - check with Jesse
+
+*****
+Then, you need to say how to get a propositional action if using a default 
+sampling method
+This is also used to get the first action sampled when using POMCP
+-----
+get_default_action(self,state) :
+#Not implemented in EmoBayesAct - therefore not changed? Is this intentional?
+Check with Jesse.
+
+get_prop_action(self,state,rollout=False,samplenum=0)    : get the 
+propositional action when building the POMCP tree. depends on whether we are 
+doing a rollout (in which case it is a random selection) or not (in which case 
+it follows some schedule according to samplenum)
+#Small change made; should be okay but could be tuned.
+
+#POMCP functions not yet implemented. See README
