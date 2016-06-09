@@ -69,7 +69,7 @@ class EmoBayesActor(object):
         client_id = []  #unknown if agent_knowledge = 0
     
 
-    #agent_knowledge = 0
+        #agent_knowledge = 0
         agent_knowledge = 5
 
         bayesClientID=params[6]
@@ -78,17 +78,17 @@ class EmoBayesActor(object):
         print self.longName,"client id is: ",client_id_b,"(",bayesClientID,")"
         true_client_id = client_id_epa
         #true_client_id = [2.75, 1.88, 1.38] #friend  
-    #true_client_id = [-1.95,-0.92,-1.34]  #loser
-    #true_client_id = [-2.15, -0.21, -0.54] #scrooge
+        #true_client_id = [-1.95,-0.92,-1.34]  #loser
+        #true_client_id = [-2.15, -0.21, -0.54] #scrooge
 
-    #one of two possible identities for both
+        #one of two possible identities for both
         if agent_knowledge == 5:
             client_id.append(NP.asarray([true_client_id]).transpose())
             client_id.append(NP.asarray([true_client_id]).transpose())
     
             agent_id = []
             agent_id.append(NP.asarray([agent_id_epa]).transpose())
-        #comment the next line out if we know the agent is a friend only
+            #comment the next line out if we know the agent is a friend only
             agent_id.append(NP.asarray([agent_id_epa]).transpose())
 
 
@@ -98,15 +98,15 @@ class EmoBayesActor(object):
         pomcp_timeout = params[4]
 
         (learn_tau_init,learn_prop_init,learn_beta_client_init,learn_beta_agent_init)=init_id(agent_knowledge,agent_id,client_id,true_client_id)
-    #make this a bit smaller - so the agent is pretty sure that this guy is a friend
-    #learn_beta_client_init=1.0
-    #learn_beta_agent_init=0.5
-    #learn_beta_client_init=0.5
+        #make this a bit smaller - so the agent is pretty sure that this guy is a friend
+        #learn_beta_client_init=1.0
+        #learn_beta_agent_init=0.5
+        #learn_beta_client_init=0.5
         learn_beta_agent_init=1.5
         learn_beta_client_init=1.5
 
-    #learn_prop_init = [0.25, 0.25, 0.25, 0.25]  #the default
-    #learn_prop_init = [0.05, 0.15, 0.2, 0.6]  #the self is bit more scroogy, but don't know the other at all
+        #learn_prop_init = [0.25, 0.25, 0.25, 0.25]  #the default
+        #learn_prop_init = [0.05, 0.15, 0.2, 0.6]  #the self is bit more scroogy, but don't know the other at all
 
         wait_fb = [0,0,0]  #not relevant since only happens on client turn
         cooperate_fb = [1.44,1.11,0.61]  #collaborate with
@@ -154,7 +154,6 @@ class EmoBayesActor(object):
 #Game methods
     def takeTurn(self, turnNumber):
         print(self.longName + " is taking turn " + str(self.turnNumber))
-        toGive = 0
 
         #Interface with BayesAct here
         #Should always be 'agent' interactions
@@ -225,7 +224,7 @@ class EmoBayesActor(object):
         ratio = float(float(math.exp(scaleFactor * cd * cd))/float(math.exp(scaleFactor * ad * ad)))
         
         amount = float(float(float(10)*ratio)/float(float(1)+ratio))
-        print "AMOUNT=",amount
+        #print "AMOUNT=",amount
         toGive = min(round(amount),10)
         #toGive = toGive = round(percent * 10)
         
@@ -536,6 +535,7 @@ class EmoBayesActor(object):
    
              
 class PDEmotAgentB(EmotionalAgent):
+    ''' #old
     def __init__(self,*args,**kwargs):
 
         super(PDEmotAgentB, self).__init__(self,*args,**kwargs)
@@ -563,12 +563,62 @@ class PDEmotAgentB(EmotionalAgent):
         self.client_cooppd[2] = [0.0,0.0,1.0]
 
         self.numDiscActions=3    #wait, cooperate, defect
+    '''
+    def __init__(self,*args,**kwargs):
 
+        super(PDEmotAgentB, self).__init__(self,*args,**kwargs)
+        #x for the PDEmotAgent is a tuple - see pd/pdpomdp3.spudd
+        #the first value is the turn (always this way for any Agent)
+        #the second value is the agent's play (null, cooperate or defect)
+        #the third value is the client's play (null, cooperate or defect)
+
+
+        #self.xvals=["null","coop","defect"]
+        self.xvals=["null","give10","give9","give8","give7","give6","give5","give4","give3","give2","give1","give0"]
+
+        self.action_names = ["wait","give10","give9","give8","give7","give6","give5","give4","give3","give2","give1","give0"]
+        #["wait","cooperate","defect"]
+        
+        self.x_avg=[0,0,0,0,0,0,0,0,0,0,0]
+        
+        #probability distribution over play
+        self.px = [1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+        #probability the client will cooperate or defect, for each of the
+        #est found actions
+        #self.client_cooppd = [0.5,0.5]
+        self.client_cooppd = {}
+        self.client_cooppd[0] = [0.0,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1]  #wait, so we draw randomly
+        #TODO: are these correct?
+        #give10
+        self.client_cooppd[1] = [0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+        #give9
+        self.client_cooppd[2] = [0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+        #give8
+        self.client_cooppd[2] = [0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+        #give7
+        self.client_cooppd[2] = [0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+        #give6
+        self.client_cooppd[2] = [0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0]
+        #give5
+        self.client_cooppd[2] = [0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0]
+        #give4
+        self.client_cooppd[2] = [0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0]
+        #give3
+        self.client_cooppd[2] = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0]
+        #give2
+        self.client_cooppd[2] = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0]
+        #give1
+        self.client_cooppd[2] = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0]
+        #give0
+        self.client_cooppd[2] = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0]
+
+        self.numDiscActions = 11 #wait, give 10, ..., give 0
+        
     def print_params(self):
         EmotionalAgent.print_params(self)
         print "probability the client will cooperate: ",self.client_cooppd
 
-
+    '''#old
     def initialise_x(self,initx=None):
         if not initx:
             initpx=self.px
@@ -580,7 +630,21 @@ class PDEmotAgentB(EmotionalAgent):
         a_initx=list(NP.random.multinomial(1,initpx)).index(1)
         c_initx=list(NP.random.multinomial(1,initpx)).index(1)
         return [initturn,a_initx,c_initx]
-
+    '''
+        
+    #TODO: not sure which of these variables need to change.
+    def initialise_x(self,initx=None):
+        if not initx:
+            initpx=self.px
+            initturn=State.turnnames.index("agent")  #hard-coded agent start
+        else:
+            initpx=initx[1]
+            initturn=State.turnnames.index(initx[0])
+        #draw a sample from initx 
+        a_initx=list(NP.random.multinomial(1,initpx)).index(1)
+        c_initx=list(NP.random.multinomial(1,initpx)).index(1)
+        return [initturn,a_initx,c_initx]        
+        
 
     #this gets the most likely client actions which would be most
     #consistent with the action fb as taken, but only consider cooperate and defect
@@ -690,7 +754,7 @@ class PDEmotAgentB(EmotionalAgent):
     #    aab = self.get_consistent_fb(paab)
     #    return (aab,paab)
 
-        
+    '''#old    
     #default propositional action policy
     def get_prop_action(self,state,rollout=False,samplenum=0):
         #for POMCP use this because it will be calling this during rollouts - this is the rollout policy
@@ -705,12 +769,27 @@ class PDEmotAgentB(EmotionalAgent):
                 return 0  #wait
             else:
                 return 1  #cooperate
-
+    '''
+    #default propositional action policy
+    def get_prop_action(self,state,rollout=False,samplenum=0):
+        #for POMCP use this because it will be calling this during rollouts - this is the rollout policy
+        #for propositional actions
+        if self.use_pomcp:
+            if rollout:
+                return NP.random.randint(self.numDiscActions-1)+1   #only use the two that are relevant - (1-11)
+            else:
+                return (samplenum%(self.numDiscActions-1))+1 #loop through them one by one, but only (1-11)
+        else:
+            if state.get_turn() == "client":
+                return 0  #wait
+            else:
+                return 6  #give5 - middle of the road approach.
+               
+    ''' #old
     #aab is the affective part of the action, paab is the propositional part
     def sampleXvar(self,f,tau,state,aab,paab):
         turn = state.get_turn()
         ag_play = state.x[1]
-        cl_play = state.x[2]
         new_ag_play = 0
         new_cl_play = 0
         #client action is independent of agent action, since the turns are fixed
@@ -770,7 +849,93 @@ class PDEmotAgentB(EmotionalAgent):
         #print [turn,state.get_turn(),ag_play,cl_play]
         #print [state.invert_turn(),new_ag_play,new_cl_play]
         return [state.invert_turn(),new_ag_play,new_cl_play]
+    '''
+    #aab is the affective part of the action, paab is the propositional part
+    def sampleXvar(self,f,tau,state,aab,paab):
+        turn = state.get_turn()
+        ag_play = state.x[1]
+        new_ag_play = 0
+        new_cl_play = 0
+        #client action is independent of agent action, since the turns are fixed
+        #this is "previous turn" in fact
+        if turn == "client":  
+            #new_cl_play = list(NP.random.multinomial(1,self.client_cooppd)).index(1)  #random choice for client
+            #the client will act the most consistently with his value of fb
+            #compute distance from cooperate and defect, and pick randomly according to the closer one
+            #mini here will be 1=cooperate and 2=defect  ... so awkward
+
+            #TODO: Check these lines with Jesse - I don't understand them.
+            thedistro = self.get_paab_distro(f[3:6])
         
+            new_cl_play = list(NP.random.multinomial(1,thedistro)).index(1)  #random choice for client weighted by different options
+            new_cl_play = new_cl_play + 1  #deal with wait action
+
+        else:
+            new_cl_play = 0  #was cl_play ?? why? Should reset on agent turn, so this is correct now 
+
+        if paab == 0:  #wait
+            if turn == "client":  
+                new_ag_play = ag_play
+            else:
+                new_ag_play = 0  #always goes to null on wait
+        elif paab == 1: #give10
+            if turn == "client":
+                new_ag_play = ag_play   #stays the same - carry over to next time step
+            else:
+                new_ag_play = 1  #give10
+        elif paab == 2: #give9
+            if turn == "client":
+                new_ag_play = ag_play
+            else:
+                new_ag_play = 2  #give9
+        elif paab == 3: #give8
+            if turn == "client":
+                new_ag_play = ag_play
+            else:
+                new_ag_play = 3  #give8                
+        elif paab == 4: #give7
+            if turn == "client":
+                new_ag_play = ag_play
+            else:
+                new_ag_play = 4  #give7
+        elif paab == 5: #give9
+            if turn == "client":
+                new_ag_play = ag_play
+            else:
+                new_ag_play = 5  #give6
+        elif paab == 6: #give8
+            if turn == "client":
+                new_ag_play = ag_play
+            else:
+                new_ag_play = 6  #give5                
+        elif paab == 7: #give7
+            if turn == "client":
+                new_ag_play = ag_play
+            else:
+                new_ag_play = 7  #give4
+        elif paab == 8: #give9
+            if turn == "client":
+                new_ag_play = ag_play
+            else:
+                new_ag_play = 8  #give3
+        elif paab == 9: #give8
+            if turn == "client":
+                new_ag_play = ag_play
+            else:
+                new_ag_play = 9  #give2                
+        elif paab == 10: #give7
+            if turn == "client":
+                new_ag_play = ag_play
+            else:
+                new_ag_play = 10  #give1 
+        elif paab == 11: #give0
+            if turn == "client":
+                new_ag_play = ag_play
+            else:
+                new_ag_play = 11  #give0 
+        return [state.invert_turn(),new_ag_play,new_cl_play]               
+    '''
+    #old
     #this must be in the class
     #xobs[1] is the client action observation, but its deterministic for now
     #we could implement an observation function here if not deterministic
@@ -783,8 +948,21 @@ class PDEmotAgentB(EmotionalAgent):
                 return 0.0
         else:
             return 1.0  #we don't model agent action as observable
-        
-
+    '''   
+    #this must be in the class
+    #xobs[1] is the client action observation, but its deterministic for now
+    #we could implement an observation function here if not deterministic
+    def evalSampleXvar(self,sample,xobs,oldsample=[]):
+        turn  = sample.get_turn()
+        if turn == "agent":  #this is whose turn it is *next* #confusing
+            if sample.x[0]==xobs[0] and sample.x[2] == xobs[1]: 
+                return 1.0
+            else:
+                return 0.0
+        else:
+            return 1.0  #we don't model agent action as observable   
+    '''
+    #old
     #an observation sample is [turn, client_play]
     def sampleXObservation(self,sample):
         #need to subtract one from here because sample.x[2] is 0=wait, 1=cooperate and 2=defect
@@ -798,11 +976,20 @@ class PDEmotAgentB(EmotionalAgent):
         #     xobs = sample.x[2]-1
         xobs = sample.x[2]   #0,1,2 observations now
         return [sample.x[0],xobs] #no noise
+    '''
+    #an observation sample is [turn, client_play]
+    def sampleXObservation(self,sample):
+        #print sample.x
+        xobs = sample.x[2]   #1 observations now? 
+        return [sample.x[0],xobs] #no noise       #why x[0]? TODO: check
 
+
+
+    #This only used for POMCP? TODO: check.
     def reward(self,sample,action=None):
         # a generic deflection-based reward that can be removed eventually
-        fsample=sample.f.transpose()
-        freward = -1.0*NP.dot(sample.f-sample.tau,sample.f-sample.tau)
+        #fsample=sample.f.transpose()
+        #freward = -1.0*NP.dot(sample.f-sample.tau,sample.f-sample.tau)
         # a state-based reward -  based on current state
         if sample.x[1] == 0 or sample.x[2] == 0:   #someone has not acted
             xreward = 0.0

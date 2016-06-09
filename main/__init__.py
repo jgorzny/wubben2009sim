@@ -21,12 +21,13 @@ def main():
         bayesClientID=argv[4]
     else:
         bayesGender = "male"
-        bayesID = "friend"
+        bayesID = "undergraduate"
         tftEmotion = "anger"
         usePOMCP=True
-        bayesClientID="friend"
-    
-    TfTvsEmoBayesActor(tftEmotion, bayesGender, bayesID, usePOMCP,bayesClientID)
+        bayesClientID="undergraduate"
+        
+    timeout = 1.0
+    TfTvsEmoBayesActor(tftEmotion, bayesGender, bayesID, timeout, usePOMCP,bayesClientID)
     
 def TfTvsEmoBayesActor(tftEmotion, bayesGender, bayesID, timeout, usePOMCP, bayesClientID):
     print("Starting a game.")
