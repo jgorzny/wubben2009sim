@@ -158,6 +158,7 @@ class EmoBayesActor(object):
 
         #Interface with BayesAct here
         #Should always be 'agent' interactions
+        print self.longName, "in takeTurn", self.learn_avgs, False
         (learn_aab,learn_paab)=self.agent.get_next_action(self.learn_avgs,exploreTree=False)
         
         #print "action set:"
@@ -204,6 +205,7 @@ class EmoBayesActor(object):
         #needs this?
         learn_xobserv = [State.turnnames.index("client"),0]#[1]#[State.turnnames.index("agent"),1] #[1]
         learn_observ = []
+        print "Debugging - in takeTurn", self.longName
         self.learn_avgs=self.agent.propagate_forward(self.last_aab,learn_observ,learn_xobserv,self.last_paab)        
         
         return toGive
@@ -217,11 +219,14 @@ class EmoBayesActor(object):
         cd = float(suggestedPoint.distance(collabPoint))
         ad = float(suggestedPoint.distance(abandonPoint))
         
+        #f(x,y) = (10*(e^(-(1/16)*(x^2))/e^(-(1/16)*(y^2))))/(1+(e^(-(1/16)*(x^2))/e^(-(1/16)*(y^2))))
+        
         scaleFactor = float(float(-1)/float(16))
         ratio = float(float(math.exp(scaleFactor * cd * cd))/float(math.exp(scaleFactor * ad * ad)))
         
         amount = float(float(float(10)*ratio)/float(float(1)+ratio))
-        toGive = round(amount)
+        print "AMOUNT=",amount
+        toGive = min(round(amount),10)
         #toGive = toGive = round(percent * 10)
         
         return toGive
@@ -336,7 +341,7 @@ class EmoBayesActor(object):
         print self.longName,"Before Message: Agent thinks it was most likely a: ",aid
         print self.longName, "Before Message: Agent thought you were most likely a: ",cid
         
-        cemot_epa = self.receiveEmotMessage(intensity, emotion)
+        cemot_epa = self.receiveEmotMessageLinear(intensity, emotion) #self.receiveEmotMessage(intensity, emotion)
         print self.longName,"Observed that the other player felt",cemot_epa
         print self.longName,":",self.opponentsName,"felt",cemot_epa
         print self.longName,"about to prune",learn_observ,learn_xobserv
@@ -354,6 +359,20 @@ class EmoBayesActor(object):
     def reportScore(self):
         print(self.longName + " has " + str(self.score) + " coins.")
         
+
+    def receiveEmotMessageLinear(self, intensity, emotion):
+        if(emotion=="anger"):
+            #angry is -1.87,-0.15,-0.14
+            interval = -1.87/10.0
+            
+            return [intensity * interval, -0.15,-0.14]
+        elif(emotion=="disappointment"):
+            #disappointed is -1.5,-1.2,-0.65
+            interval = -1.5/10.0
+            
+            return [intensity * interval, -1.2,-0.65]
+        else:
+            return [0.0,0.0,0.0]
 
     def receiveEmotMessage(self, intensity, emotion):
         print self.longName,"Extra message received."
@@ -382,6 +401,8 @@ class EmoBayesActor(object):
             elif (intensity == 10):
                 result = "enraged"
         elif(emotion == "disappointment"):
+            print("Emotion was disappointment at some point")
+            #result = "disappointed"
             if(intensity == 0):
                 result = "no emotion"
             elif (intensity == 10):
@@ -404,6 +425,7 @@ class EmoBayesActor(object):
                 result = "dissatisfied"
             elif (intensity == 1):
                 result = "depressed"
+                
         else:
             result = "no emotion"
             
@@ -413,7 +435,7 @@ class EmoBayesActor(object):
         print self.longName,"observed that",self.opponentsName,"felt",result,"with EPA value",epaVal
         return epaVal
    
-                
+    '''         
     def receiveMessage(self, intensity, emotion):
         print self.longName,"Extra message received."
                 
@@ -506,11 +528,11 @@ class EmoBayesActor(object):
                 result = [-1.83,-0.33,-0.06]
             else:
                 #degrade
-                print self.longName,"observed that",self.opponentsName,"felt","degrage"
+                print self.longName,"observed that",self.opponentsName,"felt","degrade"
                 result = [-2.35,-0.28,-0.23]
         
         return result
-    
+    '''
    
              
 class PDEmotAgentB(EmotionalAgent):

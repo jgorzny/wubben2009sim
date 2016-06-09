@@ -286,13 +286,40 @@ if __name__ == "__main__":
     sys.stdout = oldstdout
     '''
 
-    print "Starting experiment"
-    runExperiment("after-fix-two-no-pomcp-undergrad-undergrad", 100, 0.5, "D:\Research Data\CS886\Wubben2009", 1.0, "undergraduate", False,"undergraduate")
+    print "Starting"
+    print (sys.version)
+    #numpy.random.warnings.simplefilter('error', RuntimeWarning)
+
+    
+    runExperiment("change-emotion-function", 100, 0.0, "D:\Research Data\CS886\Wubben2009", 1.0, "undergraduate", False,"undergraduate")
     sys.stdout = oldstdout
     
-    print "Starting experiment 2"
-    runExperiment("after-fix-two-pomcp-undergrad-undergrad", 100, 0.5, "D:\Research Data\CS886\Wubben2009", 1.0, "undergraduate", True,"undergraduate")
+    '''
+    print "Starting experiment gs -gs "
+    runExperiment("after-fix-two-no-pomcp-gs-gs", 100, 0.5, "D:\Research Data\CS886\Wubben2009", 1.0, "graduate student", False,"graduate student")
+    sys.stdout = oldstdout
+    
+    print "Starting experiment "
+    runExperiment("after-fix-two-no-pomcp-gs-gs", 100, 1.0, "D:\Research Data\CS886\Wubben2009", 1.0, "university student", False,"university student")
+    sys.stdout = oldstdout
+    
+    print "Starting experiment "
+    runExperiment("after-fix-two-no-pomcp-gs-gs", 100, 0.0, "D:\Research Data\CS886\Wubben2009", 1.0, "university student", False,"university student")
+    sys.stdout = oldstdout
+    
+    print "Starting experiment"
+    runExperiment("after-fix-two-no-pomcp-gs-gs", 100, 0.0, "D:\Research Data\CS886\Wubben2009", 1.0, "undergraduate", False,"undergraduate")
     sys.stdout = oldstdout    
+    
+    print "Starting experiment"
+    runExperiment("after-fix-two-no-pomcp-gs-gs", 100, 1.0, "D:\Research Data\CS886\Wubben2009", 1.0, "undergraduate", False,"undergraduate")
+    sys.stdout = oldstdout  
+    '''     
+    
+    #print "Starting experiment 2"
+    #runExperiment("after-fix-two-pomcp-friend-friend", 100, 0.5, "D:\Research Data\CS886\Wubben2009", 1.0, "friend", True,"friend")
+    #sys.stdout = oldstdout    
+    
     #print "Starting fixed experiment-large"
     #runExperiment("first-fix-large", 1000, 0.5, "D:\Research Data\CS886\Wubben2009", 5.0, "NA")
     #sys.stdout = oldstdout
