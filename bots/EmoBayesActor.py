@@ -8,6 +8,7 @@ Created on Mar 2, 2016
 from bayesactemot import *
 from sympy import *
 import constants
+from bots.constants import getWaitVector
 
 class EmoBayesActor(object):
     
@@ -28,10 +29,18 @@ class EmoBayesActor(object):
         self.shortScore = 0
         self.shortMax = 0
         
+        wait_fb = constants.getWaitVector()  #not relevant since only happens on client turn
+        cooperate_fb = constants.getCoopVector()  #collaborate with
+        defect_fb = constants.getDefectVector()  #abandon 
+        
+        self.coopVect = cooperate_fb
+        self.defectVect = defect_fb    
+        self.waitVect = wait_fb    
+        
         #BayesAct initialization follows        
                 
-        self.num_samples = 1000
-        initial_px = [1.0,0.0,0.0]
+        self.num_samples = 100000
+        initial_px = constants.initialpx() #TODO this
 
         initial_learn_turn = "agent"
 
@@ -109,17 +118,16 @@ class EmoBayesActor(object):
         #learn_prop_init = [0.25, 0.25, 0.25, 0.25]  #the default
         #learn_prop_init = [0.05, 0.15, 0.2, 0.6]  #the self is bit more scroogy, but don't know the other at all
 
-        wait_fb = [0,0,0]  #not relevant since only happens on client turn
-        cooperate_fb = [1.44,1.11,0.61]  #collaborate with
-        defect_fb = [-2.28,-0.48,-0.84]  #abandon 
-        
-        self.coopVect = cooperate_fb
-        self.defectVect = defect_fb
 
+
+    
+        '''
         fixed_policy = {}
         fixed_policy[0] = wait_fb
         fixed_policy[1] = cooperate_fb
         fixed_policy[2] = defect_fb
+        '''
+        fixed_policy = get_give_points(self.coopVect, self.defectVect, self.waitVect, True)
 
         observation_resolution = 2.5
         action_resolution = 1.5
@@ -289,7 +297,6 @@ class EmoBayesActor(object):
         
         print self.longName +" " + str(self.last_aab) + " and " + str(self.last_paab) + " and " + str(self.learn_avgs)
 
-        #TODO: check these values
         collabVect = [1.44, 1.11, 0.61]
         abandonVect = [-2.28, -0.48, -0.84]
         
@@ -362,7 +369,6 @@ class EmoBayesActor(object):
         
         print self.longName +" " + str(self.last_aab) + " and " + str(self.last_paab) + " and " + str(self.learn_avgs)
 
-        #TODO: check these values
         collabVect = [1.44, 1.11, 0.61]
         abandonVect = [-2.28, -0.48, -0.84]
         
@@ -377,7 +383,6 @@ class EmoBayesActor(object):
             (learn_observ, learn_xobserv) = self.newObservVals(numReceived, learn_xobserv)
             
         
-        #TODO: need to add client's feeling here, occasionally.
         pre_agent_avgs = self.agent.getAverageState()
         (aid,cid)=self.agent.get_avg_ids(pre_agent_avgs.f)
         print self.longName,"Before Message: Agent thinks it was most likely a: ",aid
@@ -575,7 +580,8 @@ class EmoBayesActor(object):
         
         return result
     '''
-   
+
+       
              
 class PDEmotAgentB(EmotionalAgent):
 
@@ -594,7 +600,7 @@ class PDEmotAgentB(EmotionalAgent):
         #the first value is the turn (always this way for any Agent)
         #the second value is the agent's play (null, cooperate or defect)
         #the third value is the client's play (null, cooperate or defect)
-
+    
 
         self.xvals=["null","coop","defect"]
 
@@ -631,40 +637,39 @@ class PDEmotAgentB(EmotionalAgent):
         self.action_names = ["wait","give10","give9","give8","give7","give6","give5","give4","give3","give2","give1","give0"]
         #["wait","cooperate","defect"]
         
-        self.x_avg=[0,0,0,0,0,0,0,0,0,0,0]
+        self.x_avg=[0,0,0,0,0,0,0,0,0,0,0,0]
         
         #probability distribution over play
-        self.px = [1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+        self.px = constants.initialpx()
         #probability the client will cooperate or defect, for each of the
         #est found actions
         #self.client_cooppd = [0.5,0.5]
         self.client_cooppd = {}
-        self.client_cooppd[0] = [0.0,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1]  #wait, so we draw randomly
-        #TODO: are these correct?
+        self.client_cooppd[0] = [0.0,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1]  #wait, so we draw randomly
         #give10
-        self.client_cooppd[1] = [0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+        self.client_cooppd[1] = [0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
         #give9
-        self.client_cooppd[2] = [0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+        self.client_cooppd[2] = [0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
         #give8
-        self.client_cooppd[2] = [0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+        self.client_cooppd[3] = [0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
         #give7
-        self.client_cooppd[2] = [0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
+        self.client_cooppd[4] = [0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0]
         #give6
-        self.client_cooppd[2] = [0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0]
+        self.client_cooppd[5] = [0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0]
         #give5
-        self.client_cooppd[2] = [0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0]
+        self.client_cooppd[6] = [0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0]
         #give4
-        self.client_cooppd[2] = [0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0]
+        self.client_cooppd[7] = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0]
         #give3
-        self.client_cooppd[2] = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0]
+        self.client_cooppd[8] = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0]
         #give2
-        self.client_cooppd[2] = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0]
+        self.client_cooppd[9] = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0]
         #give1
-        self.client_cooppd[2] = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0]
+        self.client_cooppd[10] = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0]
         #give0
-        self.client_cooppd[2] = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0]
-
-        self.numDiscActions = 11 #wait, give 10, ..., give 0
+        self.client_cooppd[10] = [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0]
+        
+        self.numDiscActions = 12 #wait, give 10, ..., give 0
         
     def print_params(self):
         EmotionalAgent.print_params(self)
@@ -691,7 +696,6 @@ class PDEmotAgentB(EmotionalAgent):
         return [initturn,a_initx,c_initx]
     
     
-    #TODO: not sure which of these variables need to change.
     #def initialise_x(self,initx=None):#new
     def initialise_x_new(self,initx=None):
         if not initx:
@@ -720,6 +724,7 @@ class PDEmotAgentB(EmotionalAgent):
         return (mindist,mini+1)
 
     #gets the distribution over client actions according to consistency with fb
+    
     def get_paab_distro(self,fb):
         thedist = []
         for i in range(2):
@@ -731,7 +736,18 @@ class PDEmotAgentB(EmotionalAgent):
             thedistro = map(lambda x: 0.01,thedist)
             totweight = sum(thedistro)
         return map(lambda x: x/totweight,thedistro)
+    
+    def get_paab_distro_new(self,fb):
+        thedist = []
+        for i in range(11):
+            thedist.append(raw_dist(self.fixed_policy[i+1],fb))
         
+        thedistro = map(lambda x: math.exp(-0.125*x),thedist)
+        totweight = sum(thedistro)
+        if totweight < 1e-12:
+            thedistro = map(lambda x: 0.01,thedist)
+            totweight = sum(thedistro)
+        return map(lambda x: x/totweight,thedistro)
 
     #get the fb that is most consistent with the value of paab given
     #assumes fixed_policy is set with the values appropriately
@@ -851,7 +867,13 @@ class PDEmotAgentB(EmotionalAgent):
             if state.get_turn() == "client":
                 return 0  #wait
             else:
-                return 6  #give5 - middle of the road approach.
+                avgf=self.sample_next_f(state,self.nsamples_avgf)
+                aab=map(lambda x: float(x), avgf[3:6])
+                
+                print "aab:",aab
+                out = self.get_default_action_helper(aab)
+                return out
+                #return 6  #give5 - middle of the road approach. #jgorzny - change this
             
     def sampleXvar(self,f,tau,state,aab,paab):
         if constants.use_new_functions():
@@ -939,8 +961,7 @@ class PDEmotAgentB(EmotionalAgent):
             #compute distance from cooperate and defect, and pick randomly according to the closer one
             #mini here will be 1=cooperate and 2=defect  ... so awkward
 
-            #TODO: Check these lines with Jesse - I don't understand them.
-            thedistro = self.get_paab_distro(f[3:6])
+            thedistro = self.get_paab_distro_new(f[3:6])
         
             new_cl_play = list(NP.random.multinomial(1,thedistro)).index(1)  #random choice for client weighted by different options
             new_cl_play = new_cl_play + 1  #deal with wait action
@@ -1072,7 +1093,7 @@ class PDEmotAgentB(EmotionalAgent):
     #def sampleXObservation(self,sample):#new
         #print sample.x
         xobs = sample.x[2]   #1 observations now? 
-        return [sample.x[0],xobs] #no noise       #why x[0]? TODO: check
+        return [sample.x[0],xobs] #no noise       #why x[0]?
 
     
     def reward(self,sample,action=None):
@@ -1204,6 +1225,24 @@ class PDEmotAgentB(EmotionalAgent):
             #turns don't match, something is wrong
             return -2
         
+    def get_default_action_helper(self, aab):
+        #establish lines between cooperate and defect
+        wait_fb = constants.getWaitVector()  #not relevant since only happens on client turn
+        cooperate_fb = constants.getCoopVector()  #collaborate with
+        defect_fb = constants.getDefectVector()  #abandon 
+        options = get_give_points(cooperate_fb, defect_fb, wait_fb, False)
+        
+        #check all 10 options
+        minDeflection = 99999999.9 #TODO: use a proper max
+        out = 0
+        for i in Range(0,len(options)):
+            if options[i].distance(aab) < minDeflection:
+                out = i
+        
+        #return the smallest deflection
+        return out
+    
+    
     def reward_new(self,sample,action=None): #new
     #def reward(self,sample,action=None): #new
         if sample.x[1] == 0 or sample.x[2] == 0:   #someone has not acted
@@ -1451,3 +1490,34 @@ class PDEmotAgentB(EmotionalAgent):
         elif sample.x[1] == 11 and sample.x[2] == 11 :
             xreward = 5.0
         return xreward
+    
+def get_give_points(cooperate_fb, defect_fb, wait_fb, includeNull):
+    #cooperate_fb = self.coopVect #[1.44,1.11,0.61]  #collaborate with
+    #defect_fb = self.defectVect #[-2.28,-0.48,-0.84]  #abandon 
+    collabPoint = Point3D(cooperate_fb[0], cooperate_fb[1], cooperate_fb[2])
+    abandonPoint = Point3D(defect_fb[0], defect_fb[0], defect_fb[0])
+    
+    line = Ray3D(collabPoint, abandonPoint)
+    
+    distanceFromPoints = abandonPoint.distance(collabPoint)
+    
+    #make 10 points:        
+    xdir = line.xdirection
+    ydir = line.ydirection
+    zdir = line.zdirection
+
+    give1 = abandonPoint + [(1/distanceFromPoints)*xdir, (1/distanceFromPoints)*ydir, (1/distanceFromPoints)*zdir]
+    give2 = abandonPoint + [(2/distanceFromPoints)*xdir, (2/distanceFromPoints)*ydir, (2/distanceFromPoints)*zdir]
+    give3 = abandonPoint + [(3/distanceFromPoints)*xdir, (3/distanceFromPoints)*ydir, (3/distanceFromPoints)*zdir]
+    give4 = abandonPoint + [(4/distanceFromPoints)*xdir, (4/distanceFromPoints)*ydir, (4/distanceFromPoints)*zdir]
+    give5 = abandonPoint + [(5/distanceFromPoints)*xdir, (5/distanceFromPoints)*ydir, (5/distanceFromPoints)*zdir]     
+    give6 = abandonPoint + [(6/distanceFromPoints)*xdir, (6/distanceFromPoints)*ydir, (6/distanceFromPoints)*zdir]
+    give7 = abandonPoint + [(7/distanceFromPoints)*xdir, (7/distanceFromPoints)*ydir, (7/distanceFromPoints)*zdir]
+    give8 = abandonPoint + [(8/distanceFromPoints)*xdir, (8/distanceFromPoints)*ydir, (8/distanceFromPoints)*zdir]
+    give9 = abandonPoint + [(9/distanceFromPoints)*xdir, (9/distanceFromPoints)*ydir, (9/distanceFromPoints)*zdir]
+    
+    if includeNull:
+        options = [wait_fb, abandonPoint, give1, give2, give3, give4, give5, give6, give7, give8, give9,collabPoint]
+    else:
+        options = [abandonPoint, give1, give2, give3, give4, give5, give6, give7, give8, give9,collabPoint]
+    return options    

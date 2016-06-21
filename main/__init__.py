@@ -23,7 +23,7 @@ def main():
         bayesGender = "male"
         bayesID = "undergraduate"
         tftEmotion = "anger"
-        usePOMCP=True
+        usePOMCP=False
         bayesClientID="undergraduate"
         
     timeout = 1.0

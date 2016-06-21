@@ -291,7 +291,7 @@ if __name__ == "__main__":
     #numpy.random.warnings.simplefilter('error', RuntimeWarning)
 
     
-    runExperiment("change-emotion-function", 100, 0.0, "D:\Research Data\CS886\Wubben2009", 1.0, "undergraduate", False,"undergraduate")
+    runExperiment("change-get_prop_action", 100, 0.0, "D:\Research Data\CS886\Wubben2009", 1.0, "undergraduate", False,"undergraduate")
     sys.stdout = oldstdout
     
     '''
