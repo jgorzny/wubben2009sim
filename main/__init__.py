@@ -29,10 +29,10 @@ def main():
     timeout = 1.0
     TfTvsEmoBayesActor(tftEmotion, bayesGender, bayesID, timeout, usePOMCP,bayesClientID)
     
-def TfTvsEmoBayesActor(tftEmotion, bayesGender, bayesID, timeout, usePOMCP, bayesClientID):
+def TfTvsEmoBayesActor(tftEmotion, bayesGender, bayesID, timeout, usePOMCP, bayesClientID,numSamples, useLinearActionVect, useWideSample):
     print("Starting a game.")
     tftPlayer = TitForTat(["Alice", tftEmotion])
-    bayesPlayer = EmoBayesActor(["Bob", bayesGender, bayesID, "Alice", timeout, usePOMCP,bayesClientID])
+    bayesPlayer = EmoBayesActor(["Bob", bayesGender, bayesID, "Alice", timeout, usePOMCP,bayesClientID,numSamples, useLinearActionVect, useWideSample])
     
     for i in range(0,14):
         print("---------- Turn " + str(i) + " ------------------------")

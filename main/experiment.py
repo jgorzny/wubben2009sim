@@ -12,7 +12,7 @@ import sys
 import numpy
 import scipy.stats as stats
 
-def runExperiment(eName, N, p, path, timeout, idIn, usePOMCP,clientIDIn): 
+def runExperiment(eName, N, p, path, timeout, idIn, usePOMCP,clientIDIn, numSamples, useLinearActionVect, useWideSample): 
     
     #First, we choose N identities, and set them to be female with probability p
 
@@ -92,7 +92,7 @@ def runExperiment(eName, N, p, path, timeout, idIn, usePOMCP,clientIDIn):
         
         #redirect this output to 'specificLogFile'
         sys.stdout = open(specificLogFile, 'w')
-        TfTvsEmoBayesActor(emoGroup, gender, bayesID, timeout, usePOMCP, bayesClientID)
+        TfTvsEmoBayesActor(emoGroup, gender, bayesID, timeout, usePOMCP, bayesClientID, numSamples, useLinearActionVect, useWideSample)
         
     logFile.write("Number of males: " + str(numMale) + "\n")
     logFile.write("Number of females: " + str(numFemale) + "\n")
@@ -290,9 +290,24 @@ if __name__ == "__main__":
     print (sys.version)
     #numpy.random.warnings.simplefilter('error', RuntimeWarning)
 
-    
-    runExperiment("changes-partner-nonlinearemot-wide", 100, 0.0, "D:\Research Data\CS886\Wubben2009", 1.0, "partner", False,"partner")
+    #runExperiment(eName, N, p, path, timeout, idIn, usePOMCP,clientIDIn, numSamples, useLinearActionVect, useWideSample):
+    runExperiment("partner-nlemo-lact-1k-wide", 100, 0.0, "D:\Research Data\CS886\Wubben2009", 1.0, "partner", False,"partner", 1000, True, True)
     sys.stdout = oldstdout
+    runExperiment("partner-nlemo-lact-1k-narrow", 100, 0.0, "D:\Research Data\CS886\Wubben2009", 1.0, "partner", False,"partner", 1000, True, False)
+    sys.stdout = oldstdout
+    runExperiment("partner-nlemo-nlact-1k-wide", 100, 0.0, "D:\Research Data\CS886\Wubben2009", 1.0, "partner", False,"partner", 1000, False, True)
+    sys.stdout = oldstdout
+    runExperiment("partner-nlemo-nlact-1k-narrow", 100, 0.0, "D:\Research Data\CS886\Wubben2009", 1.0, "partner", False,"partner", 1000, False, False)
+    sys.stdout = oldstdout
+        
+    runExperiment("partner-nlemo-lact-10k-wide", 100, 0.0, "D:\Research Data\CS886\Wubben2009", 1.0, "partner", False,"partner", 10000, True, True)
+    sys.stdout = oldstdout
+    runExperiment("partner-nlemo-lact-10k-narrow", 100, 0.0, "D:\Research Data\CS886\Wubben2009", 1.0, "partner", False,"partner", 10000, True, False)
+    sys.stdout = oldstdout
+    runExperiment("partner-nlemo-nlact-10k-wide", 100, 0.0, "D:\Research Data\CS886\Wubben2009", 1.0, "partner", False,"partner", 10000, False, True)
+    sys.stdout = oldstdout
+    runExperiment("partner-nlemo-nlact-10k-narrow", 100, 0.0, "D:\Research Data\CS886\Wubben2009", 1.0, "partner", False,"partner", 10000, False, False)
+    sys.stdout = oldstdout                
     
     '''
     print "Starting experiment gs -gs "

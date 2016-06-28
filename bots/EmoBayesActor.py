@@ -39,7 +39,9 @@ class EmoBayesActor(object):
         
         #BayesAct initialization follows        
                 
-        self.num_samples = 10000
+        self.num_samples = params[7] #10000
+        self.useLinearActionVect = params[8]
+        self.useWideSample = params[9]
         initial_px = constants.initialpx() #TODO this
 
         initial_learn_turn = "agent"
@@ -110,10 +112,12 @@ class EmoBayesActor(object):
         (learn_tau_init,learn_prop_init,learn_beta_client_init,learn_beta_agent_init)=init_id(agent_knowledge,agent_id,client_id,true_client_id)
         #make this a bit smaller - so the agent is pretty sure that this guy is a friend
         #learn_beta_client_init=1.0
-        #learn_beta_agent_init=0.5
-        #learn_beta_client_init=0.5
-        learn_beta_agent_init=1.5
-        learn_beta_client_init=1.5
+        if self.useWideSample:
+            learn_beta_agent_init=1.5
+            learn_beta_client_init=1.5
+        else:
+            learn_beta_agent_init=0.5
+            learn_beta_client_init=0.5
         #jgorzny - 22 June 2016 - Try with 0.5 to see if anger line drops again?
         
         #learn_prop_init = [0.25, 0.25, 0.25, 0.25]  #the default
@@ -309,50 +313,94 @@ class EmoBayesActor(object):
             learn_observ = abandonVect
             learn_xobserv[1] = 2
         ''' 
-        (learn_observ, learn_xobserv) = self.newObservVals(numReceived,learn_xobserv)
+        if self.useLinearActionVect:
+            (learn_observ, learn_xobserv) = self.newObservVals(numReceived,learn_xobserv)
+        else:
+            (learn_observ, learn_xobserv) = self.newObservValsNonlinear(numReceived,learn_xobserv)
         
         print self.longName,"about to prune",learn_observ,learn_xobserv
         self.learn_avgs=self.agent.propagate_forward([],learn_observ,learn_xobserv,0) #self.last_paab
         
     def newObservVals(self, num, learn_xobserv):
-        collabVect = [1.44, 1.11, 0.61]
-        abandonVect = [-2.28, -0.48, -0.84]
+        collabVect = constants.getCoopVector()
+        abandonVect = constants.getDefectVector()
+        
+        options = get_give_points(collabVect, abandonVect, constants.getWaitVector(), False)
         
         if (num == 10):
-            learn_observ = collabVect
+            learn_observ = options[10]
             learn_xobserv[1] = 1
         elif (num == 9):
-            learn_observ = collabVect
+            learn_observ = options[9]
             learn_xobserv[1] = 2
         elif (num == 8):
-            learn_observ = collabVect
+            learn_observ = options[8]
             learn_xobserv[1] = 3
         elif (num == 7):
-            learn_observ = collabVect
+            learn_observ = options[7]
             learn_xobserv[1] = 4  
         elif (num == 6):
-            learn_observ = collabVect
+            learn_observ = options[6]
             learn_xobserv[1] = 5
         elif (num == 5):
-            learn_observ = collabVect
+            learn_observ = options[5]
             learn_xobserv[1] = 6
         elif (num == 4):
-            learn_observ = collabVect
+            learn_observ = options[4]
             learn_xobserv[1] = 7                        
         elif (num == 3):
-            learn_observ = collabVect
+            learn_observ = options[3]
             learn_xobserv[1] = 8
         elif (num == 2):
-            learn_observ = collabVect
+            learn_observ = options[2]
             learn_xobserv[1] = 9
         elif (num == 1):
-            learn_observ = collabVect
+            learn_observ = options[1]
             learn_xobserv[1] = 10
         else:
-            learn_observ = collabVect
+            learn_observ = options[0]
             learn_xobserv[1] = 11
             
-        return (learn_observ, learn_xobserv)          
+        return (learn_observ, learn_xobserv)   
+    
+    def newObservValsNonlinear(self, num, learn_xobserv):
+        
+        if (num == 10):
+            learn_observ = [1.44,1.11,0.61]
+            learn_xobserv[1] = 1
+        elif (num == 9):
+            learn_observ = [2.05,1.95,0.8]
+            learn_xobserv[1] = 2
+        elif (num == 8):
+            learn_observ = [-0.59,0.61,0.0]
+            learn_xobserv[1] = 3
+        elif (num == 7):
+            learn_observ = [1.04,0.54,0.62]
+            learn_xobserv[1] = 4  
+        elif (num == 6):
+            learn_observ = [1.56,1.39,1.25]
+            learn_xobserv[1] = 5
+        elif (num == 5):
+            learn_observ = [1.95,1.42,-0.06]
+            learn_xobserv[1] = 6
+        elif (num == 4):
+            learn_observ = [-2.23,-0.63,-0.53]
+            learn_xobserv[1] = 7                        
+        elif (num == 3):
+            learn_observ = [-2.25,-0.57,-0.57]
+            learn_xobserv[1] = 8
+        elif (num == 2):
+            learn_observ = [-.177,0.48,-0.28]
+            learn_xobserv[1] = 9
+        elif (num == 1):
+            learn_observ = [-2.89,-0.82,-1.57]
+            learn_xobserv[1] = 10
+        else:
+            learn_observ = [-2.28,-0.58,-0.84]
+            learn_xobserv[1] = 11
+            
+        return (learn_observ, learn_xobserv)      
+           
     def updateLastActionWithEmotion(self, numReceived, intensity, emotion):
         self.lastAction = numReceived
 
@@ -382,7 +430,11 @@ class EmoBayesActor(object):
                 learn_observ = abandonVect
                 learn_xobserv[1] = 2
         else:
-            (learn_observ, learn_xobserv) = self.newObservVals(numReceived, learn_xobserv)
+            #(learn_observ, learn_xobserv) = self.newObservVals(numReceived, learn_xobserv)
+            if self.useLinearActionVect:
+                (learn_observ, learn_xobserv) = self.newObservVals(numReceived,learn_xobserv)
+            else:
+                (learn_observ, learn_xobserv) = self.newObservValsNonlinear(numReceived,learn_xobserv)
             
         
         pre_agent_avgs = self.agent.getAverageState()
