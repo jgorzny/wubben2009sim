@@ -39,7 +39,7 @@ class EmoBayesActor(object):
         
         #BayesAct initialization follows        
                 
-        self.num_samples = 100000
+        self.num_samples = 10000
         initial_px = constants.initialpx() #TODO this
 
         initial_learn_turn = "agent"
@@ -114,7 +114,8 @@ class EmoBayesActor(object):
         #learn_beta_client_init=0.5
         learn_beta_agent_init=1.5
         learn_beta_client_init=1.5
-
+        #jgorzny - 22 June 2016 - Try with 0.5 to see if anger line drops again?
+        
         #learn_prop_init = [0.25, 0.25, 0.25, 0.25]  #the default
         #learn_prop_init = [0.05, 0.15, 0.2, 0.6]  #the self is bit more scroogy, but don't know the other at all
 
@@ -297,6 +298,7 @@ class EmoBayesActor(object):
         
         print self.longName +" " + str(self.last_aab) + " and " + str(self.last_paab) + " and " + str(self.learn_avgs)
 
+        '''
         collabVect = [1.44, 1.11, 0.61]
         abandonVect = [-2.28, -0.48, -0.84]
         
@@ -306,8 +308,8 @@ class EmoBayesActor(object):
         else:
             learn_observ = abandonVect
             learn_xobserv[1] = 2
-            
-        
+        ''' 
+        (learn_observ, learn_xobserv) = self.newObservVals(numReceived,learn_xobserv)
         
         print self.longName,"about to prune",learn_observ,learn_xobserv
         self.learn_avgs=self.agent.propagate_forward([],learn_observ,learn_xobserv,0) #self.last_paab
@@ -388,7 +390,8 @@ class EmoBayesActor(object):
         print self.longName,"Before Message: Agent thinks it was most likely a: ",aid
         print self.longName, "Before Message: Agent thought you were most likely a: ",cid
         
-        cemot_epa = self.receiveEmotMessageLinear(intensity, emotion) #self.receiveEmotMessage(intensity, emotion)
+        #23 Jun 2016 - try this
+        cemot_epa = self.receiveEmotMessage(intensity, emotion) #self.receiveEmotMessageLinear(intensity, emotion) #self.receiveEmotMessage(intensity, emotion)
         print self.longName,"Observed that the other player felt",cemot_epa
         print self.longName,":",self.opponentsName,"felt",cemot_epa
         print self.longName,"about to prune",learn_observ,learn_xobserv
